@@ -2,8 +2,18 @@
 
 \usepackage{graphicx}
 \usepackage{palatino}
+% Insert hyperlinks in the document
 \usepackage{hyperref}
-\hypersetup{colorlinks,breaklinks,urlcolor=blue, linkcolor=blue}
+\hypersetup{bookmarksopen,bookmarksnumbered,
+pdfpagemode=UseOutlines,
+colorlinks=true,
+linkcolor=blue,
+anchorcolor=blue,
+citecolor=blue,
+filecolor=blue,
+menucolor=blue,
+urlcolor=blue
+}
 \usepackage{url}
 \urlstyle{sf}
 \usepackage{tabularx}
@@ -41,33 +51,7 @@
 \input{header.tex}
 \input{employment.tex}
 \input{education.tex}
-
-\section{Honors and Awards}
-\begin{itemize}
-\addtolength{\itemsep}{-0.5\baselineskip}
-\item IEEE ICRA Best Conference Paper Award Finalist, 2015
-\item IEEE ICRA Best Video Award Finalist, 2014
-\item Finmeccanica Chair in Computer Science 2013-16
-\item RSS Early Career Spotlight Award, 2013
-\item RSS Best Paper Award Finalist, 2013
-\item IEEE ICRA Best Manipulation Paper Award Finalist, 2013
-\item Robotics Institute Cool Person of the Year Award, 2012
-\item Okawa Foundation Research Grant, 2012
-\item Office of Naval Research Young Investigator Award, 2012
-\item IEEE RO-MAN Best Paper Award Finalist, 2012
-\item RSS Best Paper Award Finalist, 2012
-\item RAS Most Active Technical Committee Award: Mobile Manipulation, 2011 
-\item ACM/IEEE HRI Best Paper Award Winner, 2010
-\item IEEE IROS Best Paper Award Finalist, 2010
-\item IEEE ICRA Best Manipulation Paper Award Finalist, 2010
-\item IEEE ICRA Best Vision Paper Award Finalist, 2009
-\item Intel Corporate Technology Group Divisional Recognition Awards, May, July, Oct 2008
-\item Intel Research Pittsburgh Lab Research Awards, January, July 2006, January 2007
-%\item Graduate Fellowship, The Robotics Institute, Carnegie Mellon University 1999 - 2005
-%\item Jawaharlal Nehru Summer Research Fellowship, Indian Institute of Science 1997,1998
-%\item Rajiv Gandhi Award for Best Summer Research Fellow, Indian Institute of Science 1997,1998
-%\item Indian National Mathematics Olympiad 1994
-\end{itemize}
+\input{awards.tex}
 \newpage
 
 \section{Mentoring (The Robotics Institute, Carnegie Mellon University, unless otherwise noted)} 
