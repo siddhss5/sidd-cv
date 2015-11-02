@@ -54,29 +54,7 @@ urlcolor=blue
 \input{awards.tex}
 \newpage
 \input{mentoring.tex}
-
-\section{Publications}
-\let\tempsection=\section
-\renewcommand{\section}[2]{\subsection#1{#2}}
-
-%\renewcommand{\refname}{Refereed Journals}
-\nocitejour{*}
-\bibliographystylejour{plainyr-rev} % Reverse chronological pubs
-\bibliographyjour{siddpubs/siddpubs-journal}
-
-%\renewcommand{\refname}{Refereed Conferences}
-\nociteconf{*}
-\bibliographystyleconf{plainyr-rev} % Reverse chronological pubs
-\bibliographyconf{siddpubs/siddpubs-conf}
-
-%\renewcommand{\refname}{Reports and Theses}
-\nocitemisc{*}
-\bibliographystylemisc{plainyr-rev} % Reverse chronological pubs
-\bibliographymisc{siddpubs/siddpubs-misc}
-
-
-
-\let\section=\tempsection
+\input{publications.tex}
 
 \section{Selected Invited Talks}
 \begin{itemize}
@@ -395,9 +373,9 @@ Popular Science & {Rise of the Helpful Machines: Meet 10 of the most advanced hu
 \section{Extracurricular}
 \begin{itemize}
 \addtolength{\itemsep}{-0.5\baselineskip}
+\item 3rd Place, Finish MS 5M Run, 2015 
 \item Fastest advisor-student time, Random Distance Run, 2013
 \item LaSalle Bank Chicago Marathon 2007, 2008
-\item Ikea Half Marathon Pittsburgh 2008, 2014
 \item Pittsburgh AB Squash League champion 2005
 \item Pittsburgh C Squash League champion 2002
 \item Institute silver medalist in Badminton, Indian Institute of Technology Madras 1998
