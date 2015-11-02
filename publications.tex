@@ -1,0 +1,25 @@
+% !TEX root = sidd-cv.tex
+
+
+\section{Publications}
+\let\tempsection=\section
+\renewcommand{\section}[2]{\subsection#1{#2}}
+
+%\renewcommand{\refname}{Refereed Journals}
+\nocitejour{*}
+\bibliographystylejour{plainyr-rev} % Reverse chronological pubs
+\bibliographyjour{siddpubs/siddpubs-journal}
+
+%\renewcommand{\refname}{Refereed Conferences}
+\nociteconf{*}
+\bibliographystyleconf{plainyr-rev} % Reverse chronological pubs
+\bibliographyconf{siddpubs/siddpubs-conf}
+
+%\renewcommand{\refname}{Reports and Theses}
+\nocitemisc{*}
+\bibliographystylemisc{plainyr-rev} % Reverse chronological pubs
+\bibliographymisc{siddpubs/siddpubs-misc}
+
+
+
+\let\section=\tempsection
