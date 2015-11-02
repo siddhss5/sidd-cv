@@ -24,17 +24,12 @@
 
 \usepackage[margin=0.75in]{geometry}
 
-% Using svn:keyword
-% svn propset svn:keywords 'Date' cv-sidd-10.tex
-\newcommand{\svn}[1]{\svnsub#1}
-\def\svnsub$#1${#1}
+\newif\ifBG
+\BGfalse
 
 
 %--------------------BEGIN DOCUMENT----------------------
 \begin{document}
-
-
-
 \pagestyle{empty} % non-numbered pages
 
 %--------------------TITLE-------------
@@ -42,32 +37,9 @@
 		{\bf\LARGE Prof. Siddhartha Srinivasa
 	}\bigskip\par}
 
-
-%--------------------LAST MODIFIED-------------
-\let\thefootnote\relax\footnotetext{Last modified: \svn{$Date: 2015-04-23 11:06:25 -0400 (Thu, 23 Apr 2015) $}} 
-
 %--------------------SECTIONS-----------------------------------
-\begin{center}
-\begin{tabular}{lrl}
-The Personal Robotics Lab & \textsc{Phone:} & (412) 973 9615 \\
-The Robotics Institute& \textsc{Fax:} & (412) 297 4110 \\
-Carnegie Mellon University& \textsc{Email:} & \url{siddh@cs.cmu.edu}\\
-5000 Forbes Avenue&  \textsc{WWW:} & \url{http://www.cs.cmu.edu/~siddh}\\
-Pittsburgh, PA - 15213 & \textsc{Admin:} & Jean Harpley (\url{jean@cs.cmu.edu})
-\end{tabular}
-\end{center}
-
-\section{Employment}
-\noindent
-Finmeccanica Associate Professor in Computer Science\hfill 2013-Present\\
-Associate Professor\hfill 2011-2013\\
-The Robotics Institute\\
-Carnegie Mellon University\\
-Pittsburgh, PA\\
-\\
-Senior Research Scientist \hfill 2005-2011\\
-Intel Labs Pittsburgh\\
-Pittsburgh, PA\\
+\input{header.tex}
+\input{employment.tex}
 
 \section{Education}
 \noindent
