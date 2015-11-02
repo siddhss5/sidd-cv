@@ -1,0 +1,612 @@
+\documentclass[10pt]{article}
+
+\usepackage{graphicx}
+\usepackage{palatino}
+\usepackage{hyperref}
+\hypersetup{colorlinks,breaklinks,urlcolor=blue, linkcolor=blue}
+\usepackage{url}
+\urlstyle{sf}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\usepackage{multibib}
+\newcites{jour}{Refereed Journals}
+\newcites{conf}{Refereed Conferences}
+\newcites{misc}{Reports and Theses}
+
+%CV Sections inspired by: 
+%http://stefano.italians.nl/archives/26
+\usepackage{titlesec}					%custom \section
+\titleformat{\section}{\bf\large\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{10pt}{10pt}
+\titleformat{\subsection}{\bf\raggedright}{}{0em}{}
+\titlespacing{\subsection}{0pt}{0pt}{10pt}
+
+\usepackage[margin=0.75in]{geometry}
+
+% Using svn:keyword
+% svn propset svn:keywords 'Date' cv-sidd-10.tex
+\newcommand{\svn}[1]{\svnsub#1}
+\def\svnsub$#1${#1}
+
+
+%--------------------BEGIN DOCUMENT----------------------
+\begin{document}
+
+
+
+\pagestyle{empty} % non-numbered pages
+
+%--------------------TITLE-------------
+\par{\centering
+		{\bf\LARGE Prof. Siddhartha Srinivasa
+	}\bigskip\par}
+
+
+%--------------------LAST MODIFIED-------------
+\let\thefootnote\relax\footnotetext{Last modified: \svn{$Date: 2015-04-23 11:06:25 -0400 (Thu, 23 Apr 2015) $}} 
+
+%--------------------SECTIONS-----------------------------------
+\begin{center}
+\begin{tabular}{lrl}
+The Personal Robotics Lab & \textsc{Phone:} & (412) 973 9615 \\
+The Robotics Institute& \textsc{Fax:} & (412) 297 4110 \\
+Carnegie Mellon University& \textsc{Email:} & \url{siddh@cs.cmu.edu}\\
+5000 Forbes Avenue&  \textsc{WWW:} & \url{http://www.cs.cmu.edu/~siddh}\\
+Pittsburgh, PA - 15213 & \textsc{Admin:} & Jean Harpley (\url{jean@cs.cmu.edu})
+\end{tabular}
+\end{center}
+
+\section{Employment}
+\noindent
+Finmeccanica Associate Professor in Computer Science\hfill 2013-Present\\
+Associate Professor\hfill 2011-2013\\
+The Robotics Institute\\
+Carnegie Mellon University\\
+Pittsburgh, PA\\
+\\
+Senior Research Scientist \hfill 2005-2011\\
+Intel Labs Pittsburgh\\
+Pittsburgh, PA\\
+
+\section{Education}
+\noindent
+Ph.D., Carnegie Mellon University\hfill August 2005\\
+Committee: Matthew Mason (advisor), Michael Erdmann (advisor),\\ 
+Alfred Rizzi (CMU), Yan-bin Jia (Iowa State)\\
+Thesis:  \textit{Control Synthesis for Dynamic Contact Manipulation}\\
+\\
+Master of Science, Carnegie Mellon University\hfill August 2001\\
+Advisors: Matthew Mason, Michael Erdmann\\
+Thesis:  \textit{Experiments with Nonholonomic Manipulation}\\
+\\
+Bachelor of Technology, Indian Institute of Technology Madras\hfill August 1999\\
+Advisor: A. Radhakrishnan\\
+Thesis: \textit{Reverse Engineering using the Structured Lighting Technique}
+
+\section{Honors and Awards}
+\begin{itemize}
+\addtolength{\itemsep}{-0.5\baselineskip}
+\item IEEE ICRA Best Conference Paper Award Finalist, 2015
+\item IEEE ICRA Best Video Award Finalist, 2014
+\item Finmeccanica Chair in Computer Science 2013-16
+\item RSS Early Career Spotlight Award, 2013
+\item RSS Best Paper Award Finalist, 2013
+\item IEEE ICRA Best Manipulation Paper Award Finalist, 2013
+\item Robotics Institute Cool Person of the Year Award, 2012
+\item Okawa Foundation Research Grant, 2012
+\item Office of Naval Research Young Investigator Award, 2012
+\item IEEE RO-MAN Best Paper Award Finalist, 2012
+\item RSS Best Paper Award Finalist, 2012
+\item RAS Most Active Technical Committee Award: Mobile Manipulation, 2011 
+\item ACM/IEEE HRI Best Paper Award Winner, 2010
+\item IEEE IROS Best Paper Award Finalist, 2010
+\item IEEE ICRA Best Manipulation Paper Award Finalist, 2010
+\item IEEE ICRA Best Vision Paper Award Finalist, 2009
+\item Intel Corporate Technology Group Divisional Recognition Awards, May, July, Oct 2008
+\item Intel Research Pittsburgh Lab Research Awards, January, July 2006, January 2007
+%\item Graduate Fellowship, The Robotics Institute, Carnegie Mellon University 1999 - 2005
+%\item Jawaharlal Nehru Summer Research Fellowship, Indian Institute of Science 1997,1998
+%\item Rajiv Gandhi Award for Best Summer Research Fellow, Indian Institute of Science 1997,1998
+%\item Indian National Mathematics Olympiad 1994
+\end{itemize}
+\newpage
+
+\section{Mentoring (The Robotics Institute, Carnegie Mellon University, unless otherwise noted)} 
+\subsection{Current Students}
+\vspace{-1em}
+\begin{center}
+\begin{tabular}{lrp{0.62\linewidth}ll}
+Anca Dragan & Ph.D.  &Robot Motion for Seamless Human-Robot Collaboration & &2009-\\
+Chris Dellin & Ph.D.  & Efficient Manipulation Task Planning via Reuse-Informed Optimization of Planning Effort  & &2009-\\
+Shervin Javdani & Ph.D. &(+Drew Bagnell) & & 2011-\\
+Michael Koval & Ph.D. &(+Nancy Pollard) & & 2012-\\ 
+Zita Marinho & Ph.D. &(+Geoff Gordon) & & 2012-\\
+Jennifer King & Ph.D. & & & 2012-\\ 
+Laura Herlant & Ph.D. & & & 2013-\\
+Matt Klingensmith & Ph.D. &(+Michael Kaess) & & 2013-\\
+Aaron Walsman & M.S. & & & 2013-\\
+Evan Shapiro & M.S. & & & 2014-\\
+Stefanos Nikolaidis & Ph.D. & & & 2014-
+\end{tabular}
+\end{center}
+
+\subsection{Current Postdoctoral Fellows}
+\noindent
+Aaron Johnson \hfill 2015-\\
+Pyry K. Matikainen \hfill 2014-\\
+
+\subsection{Current Staff}
+\noindent
+Garth Zeglin \hfill 2014-\\
+Prasanna Velagapudi \hfill 2012-\\
+Michael Dawson-Haggerty \hfill 2011-\\
+J. Michael Vandeweghe \hfill 2006-\\
+
+
+\subsection{Graduated}
+\noindent
+Dmitry Berenson, Ph.D. (+James Kuffner) \hfill 2006-2011\\
+Thesis: \textit{Constrained Manipulation Planning}\hfill Now: Assistant Professor, WPI\\
+\\
+Alvaro Collet, Ph.D. (+Martial Hebert) \hfill 2009-2012\\
+Thesis: \textit{Lifelong Robotic Object Perception} \hfill Now: Research Scientist, Microsoft\\
+\\
+Mehmet Dogar, Ph.D. \hfill 2008-2013\\
+Thesis: \textit{A Framework for Manipulation in Cluttered Environments} \hfill Now: Postdoc MIT\\
+\\
+Garratt Gallagher, M.S. (+Drew Bagnell) \hfill 2007-2009\\ 
+Thesis: \textit{GATMO: A Generalized Approach to Tracking Movable Objects}\hfill Now: Google Robotics\\
+\\
+Martin Herrmann, M.S. (+Dr.-Inf. Uwe Hanebeck) \hfill 2009\\
+Institute f\"ur Technik der Informationsverarbeiung, Universit\"at Karlsruhe\hfill Now: TU Braunschweig\\
+Thesis: \textit{Active scene and object reconstruction for robotic manipulation from vision and laser}\\
+\\
+Alvaro Collet, M.S. (+Chris Atkeson) \hfill 2007-2009\\
+Thesis: \textit{Object Recognition and Full Pose Registration from a Single Image for Robotic Manipulation}\\
+\\
+Christopher Dellin, M.S. \hfill 2009-2012\\
+Thesis: \textit{Configuration Space Geometry of Multi-Object Manipulation} \hfill Now: Ph.D. CMU\\
+\\
+Kyle Strabala, M.S. \hfill 2010-2012\\
+Thesis: \textit{Learning the Communication of Intent Prior to Physical Collaboration} \hfill Now: Robotics Engineer, NREC\\
+\\
+Elizabeth Cha, M.S. (+Jodi Forlizzi)  \hfill 2012-14\\
+Thesis: \textit{Robots in the Home: Qualitative and Quantitative Insights into Kitchen Organization} \hfill Now: Ph.D. USC\\
+
+\subsection{Student Fellowships}
+\noindent
+Dmitry Berenson \hfill Intel\\
+Alvaro Collet \hfill Caja Madrid\\
+Mehmet Dogar \hfill Fulbright\\
+Elizabeth Cha \hfill NSF\\
+Anca Dragan \hfill Gordon Bell, Siebel, Dan David, Intel, Google Anita Borg, HRI Pioneer\\
+Garratt Gallagher \hfill NSF\\
+Laura Herlant \hfill Hertz, NSF, HRI Pioneer\\
+Shervin Javdani \hfill NSF\\
+Jennifer King \hfill NASA\\
+Michael Koval \hfill NASA, NSF\\
+Zita Marinho \hfill CMU-Portugal\\
+Stefanos Nikolaidis \hfill Gordon Bell\\
+Rachel Holladay \hfill SRC-URO, CRA Outstanding Undergraduate Female Researcher Finalist\\
+
+
+\subsection{Graduate Interns}
+\noindent
+Marco Cognetti (University of Rome) \hfill Spring 2015-\\
+Joshua Haustein (Universit\"at Karlsruhe) \hfill 2014\\
+Henny Admoni (Yale) \hfill Summer 2013\\
+Georg Bartels (TU Bremen) \hfill Summer 2013\\
+Katie Correll  \hfill Spring 2013-\\
+Michael Koval  \hfill Summer 2012\\
+Steven Gray (Penn) \hfill Summer 2011\\
+Vincenzo Micelli (University of Parma) \hfill January 2011 - August 2011\\
+Tim Niemueller (RWTH Aachen) \hfill July 2010 - December 2010\\ 
+Peter Kaiser (Universit\"at Karlsruhe) \hfill September 2010 - December 2010\\ 
+Maya Cakmak (Georgia Tech) \hfill Summer 2010\\ 
+Alex Sorokin (UIUC) \hfill September 2009 - April 2010\\ 
+Lillian Chang  \hfill Summer 2009\\
+Ross Knepper  \hfill Summer 2009\\
+Laura Lindzey  \hfill Summer 2009\\
+Manel Martinez  \hfill June-November 2009\\
+Julius Ziegler (Universit\"at Karlsruhe) \hfill August-November 2009\\
+Nico Blodow (TU Munich) \hfill February-April 2009\\
+Geoffrey Hollinger  \hfill Summer 2008\\
+Kevin Peterson  \hfill Summer 2008\\
+Nathan Ratliff  \hfill Summer 2007, 2008\\
+Martin Rufli (ETH, Z\"urich) \hfill Summer 2008\\
+Rosen Diankov  \hfill September 2008 - January 2009\\
+Michael Ashley-Rollman  \hfill Summer 2006\\
+Stuart Anderson  \hfill Summer 2006\\
+Michael DeRosa  \hfill Summer 2006\\
+Ashish Deshpande (U.Mich) \hfill Summer 2006\\
+Jiaxin Fu  \hfill Summer 2006\\
+Preethi Bhatt  \hfill Summer 2006\\
+
+\subsection{Undergraduate Interns}
+\noindent
+Kevin Zhang  \hfill Spring 2015-\\
+Joey Fernau  \hfill Spring 2015-\\
+Pengju Jin  \hfill Fall 2014-\\
+Angela Wang  \hfill Fall 2014-\\
+Peter McHale  \hfill Fall 2014\\
+Vikram Sunder  \hfill Spring 2014-\\
+Don Zheng  \hfill Spring 2014-\\
+Neil Jassal  \hfill Spring 2014-\\
+Myles Blodnick  \hfill Spring 2014\\
+Scott Martin  \hfill Spring 2014\\
+Yuyang Guo  \hfill Fall 2013 - Fall 2014\\
+Rachel Holladay  \hfill Fall 2013-\\
+Andrey Kurenkov (Georgia Tech) \hfill Summer 2013\\ 
+Abhijeet Tallavajhula (IIT) \hfill Summer 2012\\
+Bo Xiong (Connecticut) \hfill Summer 2012\\
+Corina Guaru (Jacobs) \hfill Summer 2012\\
+Debidatta Dwebi (IIT) \hfill Summer 2012\\
+Kenton Lee (Penn) \hfill Summer 2012\\
+Dominic Zirbel  \hfill Summer 2012\\
+Tom Mullins  \hfill Fall 2011\\
+Nick Stanley  \hfill Fall 2011\\
+Alex Zirbel  \hfill Fall 2011 - Fall 2012\\
+Tudor Achim  \hfill Summer 2009-Fall 2010\\
+Andrew Yeager  \hfill Fall 2009\\
+Ian-Clanton Thuon  \hfill Fall 2008 - Spring 2009\\
+Daniel Dewey  \hfill Summer 2007 - Spring 2008\\
+
+\subsection{Ph.D Thesis Committees}
+\noindent
+Breelyn Kane Styler  \hfill 2011-\\ 
+Mike Phillips  \hfill 2011-\\
+Alberto Rodriguez  \hfill 2007-2013\\
+Ross Knepper  \hfill 2006-2011\\
+Nathan Ratliff  \hfill 2004-2009\\
+
+\section{Publications}
+\let\tempsection=\section
+\renewcommand{\section}[2]{\subsection#1{#2}}
+
+%\renewcommand{\refname}{Refereed Journals}
+\nocitejour{*}
+\bibliographystylejour{plainyr-rev} % Reverse chronological pubs
+\bibliographyjour{siddpubs/siddpubs-journal}
+
+%\renewcommand{\refname}{Refereed Conferences}
+\nociteconf{*}
+\bibliographystyleconf{plainyr-rev} % Reverse chronological pubs
+\bibliographyconf{siddpubs/siddpubs-conf}
+
+%\renewcommand{\refname}{Reports and Theses}
+\nocitemisc{*}
+\bibliographystylemisc{plainyr-rev} % Reverse chronological pubs
+\bibliographymisc{siddpubs/siddpubs-misc}
+
+
+
+\let\section=\tempsection
+
+\section{Selected Invited Talks}
+\begin{itemize}
+\addtolength{\itemsep}{-0.5\baselineskip}
+\item \textit{Mathematical Models for Human Robot Interaction},
+Seminar at Northwestern, September 2014
+\item \textit{The Robot Drama Project: Algorithms and open-source tools to enable robot dramatic performance},
+Plenary Keynote at IEEE Workshop on Advanced Robotics and its Social Impacts, September 2014
+\item \textit{Feedback-driven Physics-based Manipulation},
+Invited talk at RSS Workshop on Information-based Grasp and Manipulation Planning, July 2014
+\item \textit{The Mathematics of Human Robot Interaction},
+Colloquium at National University of Singapore, June 2014
+\item \textit{State Estimation for Contact Manipulation with the Manifold Particle Filter},
+Invited talk at ISRR, December 2013
+\item \textit{The Mathematics of Human-Robot Interaction},
+Invited talk at National University of Singapore, December 2013
+\item \textit{The Mathematics of Human-Robot Interaction},
+Early Career Spotlight talk at RSS, June 2013
+\item \textit{Lifelong Robotic Object Perception and Manipulation},
+Invited talk at RSS Workshop on Robots in Clutter and RGB-D Workshop, June 2013
+\item \textit{The Mathematics of Human-Robot Interaction},
+Invited talk at RSS Workshop on Learning from Demonstration, June 2013
+\item \textit{A Framework for Reconfiguration Planning in Clutter},
+Invited talk at RSS Workshop on Combined Robot Motion Planning and AI Planning for Practical Applications, June 2013
+\item \textit{Lifelong Robotic Object Perception},
+Invited talk at ICRA Workshop on Autonomous Learning, May 2013
+\item \textit{Physics-based Manipulation},
+Invited talk at AAAI Fall Symposium, October 2012
+\item \textit{Result replication in robotics},
+Invited talk at RSS Workshop - From theory to practice of performance comparison and result replications in Robotics, July 2012
+\item \textit{Lifelong robotic object discovery},
+Invited talk at RSS Workshop - RGB-D: Advanced Reasoning with Depth Cameras, July 2012
+\item \textit{Enabling Mobile Manipulation in the Real World},
+Invited talk at International Symposium on Robotics Research (ISRR), August 2011
+\item \textit{Enabling Mobile Manipulation in the Real World},
+GRASP Seminar, University of Pennsylvania, April 2011
+\item \textit{Personal Robotics at Intel},
+Computer Science Department Seminar, National Taiwan University, November 2010
+\item \textit{Personal Robotics},
+Keynote at Quality of Life Technologies Conference, September 2010
+\item \textit{Personal Robotics at Intel},
+Keynote at Shastra 2010, Indian Institute of Technology Madras, September 2010
+\item \textit{Manipulation Planning},
+Workshop on Mobile Manipulation, IEEE ICRA, Anchorage, May 2010
+\item \textit{Personal Robotics},
+Technology for Life and Living: Aging and Technology at the Cutting Edge, March 2010
+\item \textit{Personal Robotics at Intel},
+Computer Science Seminar, Indian Institute of Technology Madras, January 2010
+\item \textit{MOPED: Fast, Scalable Object Recognition and Pose Registration},
+Workshop on Semantic Perception for Mobile Manipulation,
+IEEE IROS, St. Louis, October 2009
+\item \textit{Personal Robotics at Intel},
+Workshop on Mobile Manipulation in Human Environments,
+Robotics: Systems and Science, Seattle, June 2009
+\item \textit{Careers in Robotics},
+Mars Area High School, February 2009
+\item \textit{Personal Robotics: Progress and prospects},
+PSO Tech Talk, Santa Clara, February 2009
+\item \textit{Grasp Synthesis in Cluttered Environments for Dexterous Hands},
+Workshop on Robot Manipulation: Intelligence in Human Environments,
+Robotics: Systems and Science, Zurich, June 2008
+\item \textit{Personal Robotics: Enabling actuation in uncertain physical environments},
+Intel Developer Forum Shanghai China, March 2008
+\item \textit{Personal Robotics Research at Intel},
+Plastic Surgery Grand Rounds, West Penn Hospital, Pittsburgh PA, June 2007
+\item \textit{Control synthesis for dynamic contact manipulation},
+Thesis Defense,  Carnegie Mellon University, August 2005
+\item \textit{Planning and control of dynamic contact manipulation},
+Intel Research Pittsburgh Seminar, Intel Research Pittsburgh, May 2005
+\item \textit{Planning and control of dynamic contact manipulation},
+Center for the Foundations of Robotics,  Carnegie Mellon University, February 2005
+\item \textit{Dynamic contact manipulation with remote contacts},
+Thesis Proposal,  Carnegie Mellon University, December 2003
+\item \textit{Intrinsic tactile sensing for mobile manipulation},
+Center for the Foundations of Robotics,  Carnegie Mellon University, August 2003
+\item \textit{Bilateral time-scaling for control of task freedoms of a constrained nonholonomic system},
+Manipulation Lab talk, Carnegie Mellon University, October 2002
+\item \textit{Experiments with nonholonomic manipulation},
+Institute of Information and Communication Technology (DA-IICT) Gandhinagar, May 2002
+\item \textit{Observers for nonlinear systems},
+Manipulation Lab talk, Carnegie Mellon University, March 2002
+\item \textit{Overview of Research at the Manipulation Lab},
+Indian Institute of Technology Madras, January 2001
+\item \textit{Overview of Research at the Manipulation Lab},
+Indian Institute of Science Bangalore, December 2000
+\item \textit{The Mobipulator ---  Experiments with nonholonomic manipulation},
+CIPMAS Seminar, The National University of Singapore, January 2001
+
+\end{itemize}
+
+
+\section{Teaching}
+\noindent
+\textbf{16-843 Manipulation Algorithms}\hfill Fall 2012-\\
+\textbf{The Robotics Institute, Carnegie Mellon University}\\
+\parbox[t]{0.75\textwidth}{
+Graduate-level robotics course on the theory and algorithms that enable robots to physically manipulate their world. The course covers the geometry of manipulation configuration spaces, motion planning in these spaces, synthesizing robust and stable grasps for dexterous hands, reconfiguring clutter, task-level planning of multi-stage manipulation, physics-based actions, and addressing perception and model uncertainty, with application to mobile manipulators and humanoid robots.
+}\\
+\\
+\noindent
+\textbf{16-662 Robot Autonomy}\hfill Spring 2012-\\
+\textbf{The Robotics Institute, Carnegie Mellon University}\\
+\parbox[t]{0.75\textwidth}{
+Graduate-level robotics course on manipulation, motion planning, perception, navigation,
+and machine learning algorithms for mobile manipulators. The course covers theory and algorithms,
+and has a strong hands-on component where students implement their assignments and class projects on a real mobile manipulation platform.
+}\\
+\\
+\textbf{16-741 Mechanics of Manipulation}\hfill Spring 2009\\
+\textbf{The Robotics Institute, Carnegie Mellon University}\\
+Co-taught with Matt Mason\\
+\parbox[t]{0.75\textwidth}{
+Graduate-level robotics core course on model-based robotic manipulation.
+To develop techniques for rigid body mechanics, kinematic constraint, Coulomb
+friction, gravity, and impact, and apply these techniques to manipulation
+problems including picking and placing, parts orienting, assembly, and mobile
+manipulation. 
+}\\
+%\\
+%\textbf{16-811 Math Fundamentals for Robotics, Teaching Assistant}\hfill Fall 2001\\
+%\textbf{The Robotics Institute, Carnegie Mellon University}\\
+%Instructor: Michael Erdmann\\
+%\parbox[t]{0.75\textwidth}{
+%Graduate-level robotics core course on math foundations for roboticists.
+%Lectured on the theory of curves and the applications of Frenet frames, designed and graded
+%assignments, and held office hours for a graduate level mathematics course.
+%}
+\section{Professional Activities}
+\begin{tabularx}{\linewidth}{rXr}
+Editor & International Journal of Robotics Research (IJRR) & 2014-\\
+Editor & IEEE/RSJ IROS &  2014-\\
+Editor & A Roadmap for U.S. Robotics: From Internet to Robotics & 2013\\
+Founding Program Chair & Robotics Track AAAI & 2012-2013 \\
+Founding Chair & IEEE RAS Technical Committee on Mobile Manipulation & 2010-2012\\
+Senior Program Committee & AAAI & 2012-2013 \\
+Guest Editor & IJRR, RSS Special Issue & 2013\\ 
+Guest Editor & Autonomous Robots, RSS Special Issue & 2013\\ 
+Guest Editor & IEEE RAM, Special Issue on Mobile Manipulation & 2012\\
+Area Chair & RSS & 2011-2012\\
+Associate Editor & IEEE/RSJ IROS & 2011-2012\\
+Associate Editor & IEEE ICRA & 2010-2013\\
+Panelist & NSF Robust Intelligence & 2012\\
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{rXr}
+\multicolumn{3}{c}{Organization}\\
+Presentations Chair & IEEE IROS & 2014\\ 
+Chair & IEEE ICRA Best Manipulation Paper Award Committee & 2013\\
+Publications Chair & RSS & 2013\\
+Short Presentations Chair & RSS & 2012\\
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{rXr}
+\multicolumn{3}{c}{Workshops Organized}\\
+Dagstuhl & Multimodal Manipulation Under Uncertainty & 2015\\
+IEEE ICRA & Benchmarking in Manipulation Research: The YCB Object and Model Set & 2015\\
+IEEE ICRA & Optimal Robot Motion Planning & 2015\\
+IEEE IROS & Rehabilitation and Assistive Robotics: Bridging the Gap Between Clinicians and Roboticists & 2014\\
+IEEE IROS & Robot Manipulation: What has been achieved and what remains to be done? & 2014\\
+HRI & Collaborative Manipulation & 2013\\
+RSS & Robots in Clutter: Manipulation, Perception and Navigation in Human Environments & 2012\\
+IEEE ICRA & Mobile Manipulation: Integrating Perception and Manipulation & 2011\\
+RSS & Strategies and Evaluation for Mobile Manipulation in Household Environments & 2010\\
+ICCV  & Computer Vision for Humanoid Robots in Real Environments & 2009\\
+\end{tabularx}
+
+
+
+\vspace{1em}
+\noindent \textbf{Selected Program Committees:} 
+International Conference on Human-Robot Interaction (HRI) 2012-;
+International Conference on Automated Planning and Scheduling (ICAPS) 2010;
+Robotics: Science and Systems (RSS) 2009-2010; 
+Workshop on the Algorithmic Foundations of Robotics (WAFR) 2008, 2012-;
+AAAI Special Track on Physically Grounded AI 2009-2011,
+and numerous others.
+
+\section{University Service}
+\begin{tabularx}{\linewidth}{rXr}
+Member & RI Curriculum Program Committee & 2015-\\
+Member & RI Faculty Hiring Committee & 2015- \\
+Chair & SCS ACM Doctoral Dissertation Award Committee & 2014\\
+Chair & RI Admissions Committee & 2014 \\
+Member & RI Director Search Committee & 2014 \\
+Member & SCS Student Teaching Award Committee & 2014 \\
+Member & SCS Graduate Fellowship Committee & 2012-2014 \\
+Member & RI Admissions Committee & 2012-2015 \\
+Member & QoLT Director Search Committee & 2012\\
+\end{tabularx}
+\newpage
+
+\section{Grants}
+
+\subsection{Current}
+\noindent
+National Institute of Health R01 (\#R01EB019335) \hfill 2014-2017\\
+Title: \textit{A Formalism for Customizing and Training Intelligent Assistive Devices}\\
+PI, co-PI: Brenna Argall, Northwestern\\
+\\
+National Science Foundation (\#1409003, \$ 1,076,210)\hfill 2014-2018\\
+Robust Intelligence, Division of Information \& Intelligent Systems (IIS)\\
+Title: \textit{RI: Medium: The Foundations of a Manipulation Repertoire}\\
+Co-PI, PI: Matt Mason, Co-PI: Michael Erdmann, CMU\\
+\\
+Office of Naval Research (\#ONR BAA 13-0001) \hfill 2014-2017\\
+ONR Basic Research Challenges in the Science of Autonomy\\
+Title: \textit{Mental Simulation of Intentions for Collaborative Human-Robot Learning and Planning}\\
+co-PI, PI: Andrea Thomaz, Georgia Tech.	\\
+\\
+Toyota\hfill 2013-\\
+Toyota Motor Engineering \& Manufacturing (TEMA)\\
+Title: \textit{Physics-based Intelligent Manipulation in Clutter}\\
+PI\\
+\\
+Defense Advanced Research Projects Agency (\#DARPA-BAA-12-39)\hfill 2012-2015\\
+Robotics Challenge Track A\\
+Co-PI, PI: Tony Stenz, CMU\\
+\\
+Office of Naval Research\hfill 2012-2015\\
+Young Investigator Award (ONR-YIP)\\
+Title: \textit{Enabling Advanced Autonomous Physical Manipulation Capabilities for Robots in Human-Robot Teams}\\
+PI\\
+\\
+
+\subsection{Past}
+\noindent
+Intel\hfill 2012-2014\\
+Embedded Computing Science and Technology Center\\
+Title: \textit{Lifelong Learning in the Real World}\\
+Joint PI with: Drew Bagnell, CMU\\
+\\
+ABB Research Grant \hfill 2013-2014\\
+Title: \textit{In-hand manipulation with a simple gripper}\\
+co-PI, PI: Matt Mason, CMU\\
+\\
+Research for Advanced Manufacturing in Pennsylvania (RAMP)\hfill 2013\\
+Title: \textit{Robotics-enhanced, Cost-effective Motion Test Equipment for Inertial MEMS Devices}\\
+PI, co-PI: David Bourne, CMU. Industry Collaborator: Acutronic Inc.\\
+\\
+National Science Foundation (\#1208388, \$ 150,456)\hfill 2012-2013\\
+National Robotics Initiative (NRI)\\
+Title: \textit{Addressing Clutter and Uncertainty for Robotic Manipulation in Human Environments}\\
+PI, co-PI: Kevin Lynch, Northwestern\\
+\\
+National Science Foundation (\#1228906, \$ 24,808)\hfill 2012-2013\\
+Robust Intelligence, Division of Information \& Intelligent Systems (IIS)\\
+Title: \textit{ EAGER: Building Intelligent Mobile Manipulators for Assistive Care
+}\\
+Co-PI, PI: Matt Mason, CMU\\
+\\
+National Science Foundation (\#0916557, \$ 515,079)\hfill 2009-2013\\
+Robust Intelligence, Division of Information \& Intelligent Systems (IIS)\\
+Title: \textit{A Simple but General Hand}\\
+Co-PI, PI: Matt Mason, CMU\\
+\\
+National Science Foundation (\#0540865, \$ 16,105,954)\hfill 2006-2016\\
+Ret Supplements, Engineering Research Centers, Human Resources Development\\
+Title: \textit{Quality of Life Technology Engineering Research Center}\\
+QoltBots Project Leader, PI: Takeo Kanade, CMU\\
+\\
+Defense Advanced Research Projects Agency (\#DARPA-BAA-10-28)\hfill 2010-2011\\
+Autonomous Robotic Manipulation Software Track (ARM-S)\\
+Title: \textit{REARM: Robust Extensible Autonomous Robotic Manipulation}\\
+Co-PI, PI: SRI\\
+\\
+National Science Foundation (\#0646448, \$ 99,785)\hfill 2009-2012\\
+Small Business Phase II , Division of Industrial Innovation \& Partnerships (IIP)\\
+Title: \textit{Methodology for Applying Haptic Robotics to Agile Manufacturing}\\
+Subcontractor, PI: William Townsend, Barrett Technologies\\
+
+
+\section{Selected Press Coverage}
+\begin{tabularx}{\linewidth}{rX}
+\multicolumn{2}{c}{2014}\\ 
+National Geographic & Robots 3D IMAX Movie\\
+Washington Post & HERB: A robot that can unload a dishwasher and (sometimes) take apart an Oreo\\
+National Geographic & Going Deep with David Rees: How to open a door\\
+The Verge & Robot city: how the machines are driving Pittsburgh's future\\
+Pittsburgh Post Gazette & CMU play pairs HERB the robot with human actor\\
+Politico & Robots at Work\\
+Discovery Channel & When Will My Robotic Housekeeper Be Ready?\\
+NPR & Robots that Care: The Quality of Life Technology Center Changing the World of Caregiving\\
+\end{tabularx}
+\begin{tabularx}{\linewidth}{rX}
+\multicolumn{2}{c}{2013}\\ 
+CNN & When it's too hard to separate Oreos...\\
+Discovery Channel & 	Autonomous Robot Comprehends Objects On Its Own\\
+New York Times & Disruptions: Helper Robots Are Steered, Tentatively, to Care for the Aging\\
+Wall Street Journal & Not the Jetsons, but Rosie could be your nurse\\
+Time Magazine & Welcome to Roboburgh\\
+CBS & Robotic Servants are here to help\\
+\end{tabularx}
+\begin{tabularx}{\linewidth}{rX}
+\multicolumn{2}{c}{2012}\\ 
+Engadget & {Robotic butlers, bartenders and receptionists at Carnegie Mellon}\\
+Popular Science & {HERB the Robot Butler Microwaves Your Dinner For You}\\
+Time Magazine & {Meet HERB, the Robot Butler That Knows How to Use a Microwave}\\
+Fast Company & {This Week In Bots: Will Your Kids Give Robots Civil Liberties?}\\
+NPR & {Marketplace: Good Robots Make Jobs}\\
+National Geographic & {Us. And them.
+Robots are being created that can think, act, and relate to humans. Are we ready?}\\
+\end{tabularx}
+\begin{tabularx}{\linewidth}{rX}
+\multicolumn{2}{c}{2007-2011 (At Intel)}\\ 
+NSF Science Nation & {HERB: A robot to help around the house}\\
+Scientific American & {Can Robots Be Programmed to Learn from Their Own Experiences?}\\
+BBC & {The dawn of intelligent machines}\\
+Businessweek & {World's most advanced robots}\\
+Fast Company & {Intel's Robot Butler Serves, Clears, and Does Dishes}\\
+Wired Magazine & {Butler Robot Can Fetch Drinks, Snacks}\\
+Granta & {What I think about when I think about robots}\\
+Discovery Channel & {The robot butler}\\
+Popular Science & {Rise of the Helpful Machines: Meet 10 of the most advanced human-assist 'bots from around the world}\\
+\end{tabularx}
+
+\section{Extracurricular}
+\begin{itemize}
+\addtolength{\itemsep}{-0.5\baselineskip}
+\item Fastest advisor-student time, Random Distance Run, 2013
+\item LaSalle Bank Chicago Marathon 2007, 2008
+\item Ikea Half Marathon Pittsburgh 2008, 2014
+\item Pittsburgh AB Squash League champion 2005
+\item Pittsburgh C Squash League champion 2002
+\item Institute silver medalist in Badminton, Indian Institute of Technology Madras 1998
+\item Institute bronze medalist in Tennis, Indian Institute of Technology Madras 1997, 1998
+\end{itemize}
+
+\end{document}
