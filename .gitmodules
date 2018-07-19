@@ -1,3 +1,3 @@
-[submodule "siddpubs"]
-	path = siddpubs
-	url = https://github.com/siddhss5/siddpubs
+[submodule "pubs"]
+	path = pubs
+	url = https://github.com/personalrobotics/pubs
