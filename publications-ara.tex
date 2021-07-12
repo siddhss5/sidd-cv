@@ -1,0 +1,25 @@
+% !TEX root = sidd-cv.tex
+
+
+\section{Publications (\href{https://scholar.google.com/citations?user=RCi98EAAAAAJ&hl=en}{Google Scholar})}
+\let\tempsection=\section
+\renewcommand{\section}[2]{\subsection#1{#2}}
+
+%\renewcommand{\refname}{Refereed Journals}
+\nocitejour{*}
+\bibliographystylejour{plainyr-rev} % Reverse chronological pubs
+\bibliographyjour{pubs/siddpubs-journal}
+
+%\renewcommand{\refname}{Refereed Conferences}
+\nociteconf{*}
+\bibliographystyleconf{plainyr-rev} % Reverse chronological pubs
+\bibliographyconf{pubs/siddpubs-conf}
+
+%\renewcommand{\refname}{Reports and Theses}
+\nocitemisc{*}
+\bibliographystylemisc{plainyr-rev} % Reverse chronological pubs
+\bibliographymisc{pubs/siddpubs-misc}
+
+
+
+\let\section=\tempsection

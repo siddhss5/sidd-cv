@@ -1,0 +1,80 @@
+\documentclass[10pt]{article}
+
+\usepackage{graphicx}
+\usepackage{palatino}
+% Insert hyperlinks in the document
+\usepackage{hyperref}
+\hypersetup{bookmarksopen,bookmarksnumbered,
+pdfpagemode=UseOutlines,
+colorlinks=true,
+linkcolor=blue,
+anchorcolor=blue,
+citecolor=blue,
+filecolor=blue,
+menucolor=blue,
+urlcolor=blue
+}
+\usepackage{url}
+\urlstyle{sf}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\usepackage{bibentry}
+\bibliographystyle{plain} 
+\nobibliography*
+
+%CV Sections inspired by: 
+%http://stefano.italians.nl/archives/26
+\usepackage{titlesec}					%custom \section
+\titleformat{\section}{\bf\large\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{10pt}{10pt}
+\titleformat{\subsection}{\bf\raggedright}{}{0em}{}
+\titlespacing{\subsection}{0pt}{0pt}{10pt}
+
+\usepackage[margin=0.75in]{geometry}
+
+\newif\ifBG
+\BGtrue
+%\BGfalse
+
+
+%--------------------BEGIN DOCUMENT----------------------
+\begin{document}
+\pagestyle{empty} % non-numbered pages
+
+%--------------------TITLE-------------
+\par{\centering
+		{\bf\LARGE Prof. Siddhartha Srinivasa
+	}\bigskip\par}
+
+%--------------------SECTIONS-----------------------------------
+\input{header.tex}
+\input{employment.tex}
+
+\section{Recent Paper Awards}
+\begin{itemize}
+\addtolength{\itemsep}{-0.5\baselineskip}
+\item \bibentry{gallenberger2019skewering}
+\item \bibentry{mandalika2019gls}
+\item \bibentry{haghtalab2018laziness}
+\item \bibentry{chen2018trust}
+\end{itemize}
+
+\section{Five Most Relevant Publications to ARA Proposal}
+\renewcommand{\labelenumi}{[ \arabic{enumi} ]\hfill}
+\begin{enumerate}
+
+\item \bibentry{bhattacharjee2019haptic}
+
+\item \bibentry{chen2019trust}
+
+\item \bibentry{nikolaidis2018verbal}
+
+\item \bibentry{javdani2018shared}
+
+\item \bibentry{nikolaidis2017mutual}
+\end{enumerate}
+\bibliographystyle{plain} 
+% First uncomment the line below to generate the bbl, then comment it to remove Reference section
+% \bibliography{pubs/siddpubs-journal,pubs/siddpubs-conf,pubs/siddpubs-misc}
+\end{document}
