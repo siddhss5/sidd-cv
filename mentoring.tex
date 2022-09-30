@@ -2,21 +2,14 @@
 
 
 \section{Mentoring} 
+
 \subsection{Current Ph.D. Students}
 \vspace{-1em}
 \begin{center}
 \begin{tabular}{llp{0.53\linewidth}l}
-Patrick Lancaster & +Josh Smith & \textit{Towards Dexterous In-Hand Manipulation via Electrostatic Braking and Pre-touch Sensing} & 2014-\\
-Gilwoo Lee &  & \textit{Scalable Bayesian Reinforcement Learning} & 2015-\\
-Brian Hou & & & 2016-\\
-Aditya Vamsikrishna & & & 2016-\\
-Samuel Ainsworth & & & 2016-\\
-Sherdil Niyaz & & \textit{Optimizing the Design of Robot Environments via Interleaved Optimization and White-Box Motion-Planning}& 2017-\\
-Liyiming Ke & & & 2017-\\
-William Agnew & +Pedro Domingos & & 2017-\\
-Ethan Gordon &  & & 2018-\\
-Matthew Schmittle &  & & 2018-\\
-Amal Nanvati & +Maya Cakmak & & 2019-\\
+\DTLforeach*[\not\equal{\current}{Y}]{students-phd}
+{\name=Name,\current=Current,\coadvisor=Coadvisor,\title=Title,\start=Start}
+{\name & \DTLifnullorempty{\coadvisor}{}{+\coadvisor} & \textit{\title} & \start-\\}
 \end{tabular}
 \end{center}
 
