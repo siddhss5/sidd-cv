@@ -7,7 +7,7 @@
 \vspace{-1em}
 \begin{center}
 \begin{tabular}{llp{0.53\linewidth}l}
-\DTLforeach*[\not\equal{\current}{Y}]{students-phd}
+\DTLforeach*[\DTLisieq{\current}{Y}]{students-phd}
 {\name=Name,\current=Current,\coadvisor=Coadvisor,\title=Title,\start=Start}
 {\name & \DTLifnullorempty{\coadvisor}{}{+\coadvisor} & \textit{\title} & \start-\\}
 \end{tabular}
@@ -51,6 +51,14 @@ Aaron Johnson \hfill 2015-2016\\
 
 \subsection{Alumni - Ph.D.}
 \noindent
+\DTLforeach*[\DTLisieq{\current}{N}]{students-phd}
+{\name=Name,\current=Current,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish,\nowat=NowAt}
+{\name, Ph.D. \DTLifnullorempty{\coadvisor}{}{(+\coadvisor)} \hfill \start-\finish\\
+Thesis: \textit{\title}\hfill
+Now: \nowat
+\\}
+
+
 Stefanos Nikolaidis, Ph.D. \hfill 2014-2018\\
 Thesis: \textit{Mathematical Models of Adaptation in Human-Robot Collaboration} \hfill
 Now: Assistant Professor, USC\\
