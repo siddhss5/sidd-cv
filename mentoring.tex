@@ -7,8 +7,8 @@
 \vspace{-1em}
 \begin{center}
 \begin{tabular}{llp{0.53\linewidth}l}
-\DTLforeach*[\DTLisieq{\current}{Y}]{students-phd}
-{\name=Name,\current=Current,\coadvisor=Coadvisor,\title=Title,\start=Start}
+\DTLforeach*[\DTLiseq{\finish}{}]{students-phd}
+{\name=Name,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish}
 {\name & \DTLifnullorempty{\coadvisor}{}{+\coadvisor} & \textit{\title} & \start-\\}
 \end{tabular}
 \end{center}
@@ -51,8 +51,8 @@ Aaron Johnson \hfill 2015-2016\\
 
 \subsection{Alumni - Ph.D.}
 \noindent
-\DTLforeach*[\DTLisieq{\current}{N}]{students-phd}
-{\name=Name,\current=Current,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish,\nowat=NowAt}
+\DTLforeach*[\NOT \DTLiseq{\finish}{}]{students-phd}
+{\name=Name,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish,\nowat=NowAt}
 {\name, Ph.D. \DTLifnullorempty{\coadvisor}{}{(+\coadvisor)} \hfill \start-\finish\\
 Thesis: \textit{\title}\hfill
 Now: \nowat
