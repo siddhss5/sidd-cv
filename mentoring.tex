@@ -4,58 +4,38 @@
 \section{Mentoring} 
 
 \subsection{Current Ph.D. Students}
-\vspace{-1em}
 \DTLsort{Start=descending}{students-phd}
-\begin{center}
-\begin{tabular}{llp{0.53\linewidth}l}
+\noindent
 \DTLforeach*[\DTLiseq{\finish}{}]{students-phd}
 {\name=Name,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish}
-{\name & \DTLifnullorempty{\coadvisor}{}{+\coadvisor} & \textit{\title} & \start-\\}
-\end{tabular}
-\end{center}
+{\name~\DTLifnullorempty{\coadvisor}{}{(+\coadvisor)} \hfill \start-\\
+\DTLifnullorempty{\title}{}{\textit{\title}\\}
+}
 
 \subsection{Current Postdoctoral Fellows}
-\vspace{-1em}
+\DTLsort{Start=descending}{postdocs}
 \noindent
-Tapomayukh Bhattacharjee \hfill 2017-\\
-\rightline{Next: Assistant Professor, Cornell}\\
-\\
-Christoforos Mavrogiannis \hfill 2019-\\
+\DTLforeach*[\DTLiseq{\finish}{}]{postdocs}
+{\name=Name,\coadvisor=Coadvisor,\start=Start,\finish=Finish,\nowat=NowAt}
+{\name~\DTLifnullorempty{\coadvisor}{}{(+\coadvisor)} \hfill \start-\\
+\DTLifnullorempty{\nowat}{}{\rightline{Next: \nowat}\\}
+}
+\subsection{Alumni - Postdoctoral Fellows}
+\DTLsort{Finish=descending}{postdocs}
+\noindent
+\DTLforeach*[\NOT \DTLiseq{\finish}{}]{postdocs}
+{\name=Name,\coadvisor=Coadvisor,\start=Start,\finish=Finish,\nowat=NowAt}
+{\name~\DTLifnullorempty{\coadvisor}{}{(+\coadvisor)} \hfill \start-\finish\\
+\rightline{\nowat}\\
+}
 
-\subsection{Current Staff}
-\vspace{-1em}
-\noindent
-Rosario Scalise \hfill 2017-\\
-
-\subsection{Alumni - Postdoc}
-\vspace{-1em}
-\noindent
-Sanjiban Choudhury \hfill 2018-2019\\
-\rightline{Now: Researcher, Aurora}\\
-\\
-Matthew Barnes \hfill 2018-2019\\
-\rightline{Now: Software Engineer, Google}\\
-\\
-Fereshteh Sadeghi \hfill 2019\\
-\\
-Oren Salzman \hfill 2016-2019\\
-\rightline{Now: Assistant Professor, Technion}\\
-\\
-Daqing Yi \hfill 2016-2018\\
-\rightline{Now: Software Engineer, Google}\\
-\\
-Henny Admoni \hfill 2015-2017\\
-\rightline{Now: Assistant Professor, CMU}\\
-\\
-Aaron Johnson \hfill 2015-2016\\
-\rightline{Now: Assistant Professor, CMU}\\
 
 \subsection{Alumni - Ph.D.}
 \DTLsort{Finish=descending}{students-phd}
 \noindent
 \DTLforeach*[\NOT \DTLiseq{\finish}{}]{students-phd}
 {\name=Name,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish,\nowat=NowAt}
-{\name, Ph.D. \DTLifnullorempty{\coadvisor}{}{(+\coadvisor)} \hfill \start-\finish\\
+{\name \DTLifnullorempty{\coadvisor}{}{(+\coadvisor)} \hfill \start-\finish\\
 \textit{\title}\hfill
 \nowat\\
 \\}
