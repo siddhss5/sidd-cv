@@ -20,6 +20,7 @@
 {\name~\DTLifnullorempty{\coadvisor}{}{(+\coadvisor)} \hfill \start-\\
 \DTLifnullorempty{\nowat}{}{\rightline{Next: \nowat}\\}
 }
+
 \subsection{Alumni - Postdoctoral Fellows}
 \DTLsort{Finish=descending}{postdocs}
 \noindent
@@ -35,50 +36,22 @@
 \noindent
 \DTLforeach*[\NOT \DTLiseq{\finish}{}]{students-phd}
 {\name=Name,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish,\nowat=NowAt}
-{\name \DTLifnullorempty{\coadvisor}{}{(+\coadvisor)} \hfill \start-\finish\\
+{\name~\DTLifnullorempty{\coadvisor}{}{(+\coadvisor)} \hfill \start-\finish\\
 \textit{\title}\hfill
 \nowat\\
 \\}
 
 \subsection{Alumni - M.S.}
+\DTLsort{Finish=descending}{students-ms}
 \noindent
-Jeongseok Lee, M.S. \hfill 2016-18\\
-Thesis: \textit{A Linear-Time Variational Integrator for Multibody Systems}
-\hfill Now: Engineer, Amazon\\
-\\
-Pengju Jin, M.S. \hfill 2017\\
-Thesis: \textit{Highly Robust Pose Estimation from Single Frame RGBD}
-\hfill Now: Researcher, Aurora\\
-\\
-Shushman Choudhury, M.S. \hfill 2015-2017\\
-Thesis: \textit{Anytime Geometric Motion Planning on Large Dense Roadmaps} \hfill Now: Ph.D. Stanford\\
-\\
-Rosario Scalise, M.S. (+Stephanie Rosenthal) \hfill 2015-2017\\
-Thesis: \textit{Human-Centered Design of Robot Explanations} \hfill Now: Research Staff, UW\\
-\\
-Shen Li, M.S. (+Stephanie Rosenthal) \hfill 2015-2017\\
-Thesis: \textit{Automatically Evaluating and Generating Clear Robot Explanations} \hfill Now: Ph.D., MIT\\
-\\
-Evan Shapiro, M.S.  \hfill 2013-15\\
-Thesis: \textit{A Hierarchical Framework for Configuration Space Task Planning} \hfill Now: CEO, Coda Protocol\\
-\\
-Aaron Walsman, M.S.  \hfill 2013-15\\
-Thesis: \textit{ROCK: Robust Object Constellation for Kinematic Pose} \hfill Now: Ph.D. UW\\
-\\
-Elizabeth Cha, M.S. (+Jodi Forlizzi)  \hfill 2012-14\\
-Thesis: \textit{Robots in the Home: Qualitative and Quantitative Insights into Kitchen Organization} \hfill Now: Engineer, Waymo\\
-\\
-Kyle Strabala, M.S. \hfill 2010-2012\\
-Thesis: \textit{Learning the Communication of Intent Prior to Physical Collaboration} \hfill Now: Scientist, Near Earth Autonomy\\
-\\
-Garratt Gallagher, M.S. (+Drew Bagnell) \hfill 2007-2009\\ 
-Thesis: \textit{GATMO: A Generalized Approach to Tracking Movable Objects}\hfill Now: Google Robotics\\
-\\
-Martin Herrmann, M.S. (+Dr.-Inf. Uwe Hanebeck, Universit\"at Karlsruhe) \hfill 2009\\
-Thesis: \textit{Active scene and object reconstruction for robotic manipulation from vision and laser} \hfill Now: TU Braunschweig\\
-\\
-Alvaro Collet, M.S. (+Chris Atkeson) \hfill 2007-2009\\
-Thesis: \textit{Object Recognition and Full Pose Registration from a Single Image for Robotic Manipulation}\\
+\DTLforeach*[\NOT \DTLiseq{\finish}{}]{students-ms}
+{\name=Name,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish,\nowat=NowAt}
+{\name~\DTLifnullorempty{\coadvisor}{}{(+\coadvisor)} \hfill \start-\finish\\
+\textit{\title}\hfill
+\nowat\\
+\\}
+
+
 \subsection{Alumni - Other}
 \noindent
 Ajinkya Kamat, Staff \hfill 2018-2019\\
