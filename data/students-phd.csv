@@ -1,12 +1,13 @@
 Name,Coadvisor,Title,Start,Finish,NowAt
+Yunchu Zhang,Abhishek Gupta,,2023,,
 Sidharth Talia,,,2022,,
 Helen Wang,Dieter Fox,,2022,,
 Bernie Zhou,,,2022,,
 Amal Nanvati,Maya Cakmak,,2019,,
 Matthew Schmittle,,,2018,,
-Ethan Gordon,,Adaptive Robot-Assisted Feeding: An Online Learning Framework for Acquiring Previously-Unseen Food Items,2018,,
-William Agnew,,Human Priors for Reinforcement Learning,2017,,
-Liyiming Ke,,,2017,,
+Ethan Gordon,,Tractably Adaptable Food Manipulation for Robot-Assisted Feeding,2018,2024, Postdoc @ Penn
+William Agnew,,Human Priors for Reinforcement Learning,2017,2023,Postdoc @ CMU
+Liyiming Ke,Abhishek Gupta,,2017,,
 Sherdil Niyaz,,Optimizing the Design of Robot Environments via Interleaved Optimization and White-Box Motion-Planning,2017,2022,Researcher @ Motional
 Aditya Vamsikrishna,,Efficient Robot Motion Planning in Cluttered Environments,2016,2021,Researcher @ Aurora
 Brian Hou,,Robot Motion Planning with Uncertainty and Urgency,2016,2022,Researcher @ Aurora
