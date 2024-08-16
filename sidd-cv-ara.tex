@@ -18,6 +18,8 @@ urlcolor=blue
 \urlstyle{sf}
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{enumitem} % for alphabetic enumeration
+
 
 \usepackage{bibentry}
 \bibliographystyle{plain} 
@@ -52,29 +54,26 @@ urlcolor=blue
 \input{employment.tex}
 
 \section{Recent Paper Awards}
-\begin{itemize}
+\begin{enumerate}[label={[ \arabic* ]}]
 \addtolength{\itemsep}{-0.5\baselineskip}
+\item \bibentry{nanavati2023designprinciples}
 \item \bibentry{gallenberger2019skewering}
 \item \bibentry{mandalika2019gls}
 \item \bibentry{haghtalab2018laziness}
-\item \bibentry{chen2018trust}
-\end{itemize}
+\end{enumerate}
 
-\section{Five Most Relevant Publications to ARA Proposal}
+\section{Five Most Relevant Publications to UW + Amazon Science Hub Robotics Call}
 \renewcommand{\labelenumi}{[ \arabic{enumi} ]\hfill}
 \begin{enumerate}
 
-\item \bibentry{bhattacharjee2019haptic}
+\item \bibentry{kay2024ccil}
+\item \bibentry{zhang2023cherry}
+\item \bibentry{wang2023newton}
+\item \bibentry{zhou2023realworld}
+\item \bibentry{ke2021grasping}
 
-\item \bibentry{chen2019trust}
-
-\item \bibentry{nikolaidis2018verbal}
-
-\item \bibentry{javdani2018shared}
-
-\item \bibentry{nikolaidis2017mutual}
 \end{enumerate}
 \bibliographystyle{plain} 
 % First uncomment the line below to generate the bbl, then comment it to remove Reference section
-% \bibliography{pubs/siddpubs-journal,pubs/siddpubs-conf,pubs/siddpubs-misc}
+\bibliography{pubs/siddpubs-journal,pubs/siddpubs-conf,pubs/siddpubs-misc}
 \end{document}
