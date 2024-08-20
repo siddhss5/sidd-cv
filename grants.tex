@@ -2,13 +2,13 @@
 
 \section{Grants (excludes unrestricted gifts)}
 
-\DTLsort{Start=descending}{grants}
+\DTLsort{Start=descending,Finish=descending}{grants}
 \noindent
 \DTLforeach*{grants}
 {\title=Title,\funder=Funder,\program=Program,\amount=Amount,\pi=PI,\start=Start,\finish=Finish}
 {\funder \hfill \start-\finish\\ 
 \program \hfill \$\amount\\
-Title: \textit{\title} \hfill \DTLifnullorempty{\pi}{PI}{co-PI, PI: \pi}
+\textit{\title} \hfill \DTLifnullorempty{\pi}{PI}{co-PI, PI: \pi}
 \\
 \\
 }
