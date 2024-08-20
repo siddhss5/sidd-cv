@@ -7,8 +7,9 @@
 \DTLforeach*{grants}
 {\title=Title,\funder=Funder,\program=Program,\amount=Amount,\pi=PI,\start=Start,\finish=Finish}
 {\funder \hfill \start-\finish\\ 
-\program \hfill \$\amount\\
-\textit{\title} \hfill \DTLifnullorempty{\pi}{PI}{co-PI, PI: \pi}
+\textit{\title} \hfill \DTLifnullorempty{\pi}{PI}{co-PI, PI: \pi}\\
+\program
+%\program \hfill \$\amount
 \\
 \\
 }
