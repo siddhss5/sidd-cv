@@ -1,0 +1,27 @@
+Title,Funder,Program,Amount,PI,Start,Finish
+"Safe, Fluent, and Generalizable Outdoor Autonomy", US Army Research Laboratory, "Scalable, Adaptive, and Resilient Autonomy", "150,000", Byron Boots, 2020, 2021
+Formalizing Mathematical Models of Curiosity, HONDA, HONDA Research Institute, "2,700,000",,2018,2021
+Enabling dexterous physics-based manipulation via a learning framework for shared autonomy, "Office of Naval Research (\#ONR N00014-16-R-BA01)",Long Range BAA for Navy and Marine Corps Science and Technology,"2,096,633",,2017,2020
+Safe Imitation Learning for Robotics,"National Science Foundation (\#1839371)","Division of Mathematical Sciences, the Division of Computing and Communication Foundations","125,000",Zaid Harchaoui,2018,2021
+Robust Outdoor Mobile Manipulation,Robotics Collaborative Technology Alliance,T3,"355,594",,2017,2018
+Data Efficient Policy Search for Reinforcement Learning,Amazon,Amazon Research Award,"80,000",,2017,2018
+Learning Deep Sensorimotor Policies for Shared Autonomy,"National Science Foundation (\#1748582)",National Robotics Initiative,"453,379",Sergey Levine, 2017,2019
+Learning control sharing strategies for assistive cyber-physical systems, "National Science Foundation (\#1544797)",Cyber-Physical Systems,"435,928",Brenna Argall,2015,2018
+The Foundations of a Manipulation Repertoire,"National Science Foundation (\#1409003)","Robust Intelligence, Division of Information \& Intelligent Systems","358,737",Matt Mason,2014,2018
+A Formalism for Customizing and Training Intelligent Assistive Devices, "National Institute of Health R01 (\#R01EB019335)",Smart and Connected Health,"270,199",Brenna Argall,2014,2017
+Mental Simulation of Intentions for Collaborative Human-Robot Learning and Planning,"Office of Naval Research (\#ONR BAA 13-0001)", ONR Basic Research Challenges in the Science of Autonomy,"500,000",Andrea Thomaz,2014,2017
+Physics-based Intelligent Manipulation in Clutter,Toyota,"Toyota Motor Engineering \& Manufacturing","2,000,000",,2013,2017
+An Architecture for Shared Autonomy via Optimal Control, Defense Advanced Research Projects Agency, Simplifying Complexity in Scientific Discovery (SIMPLEX),"300,000",,2015,2016
+Intelligent asisstive technology for individuals with physical disabilities, Richard King Mellon Foundation,Research Award,"80,000",,2016,2017
+Enabling Advanced Autonomous Physical Manipulation Capabilities for Robots in Human-Robot Teams, Office of Naval Research, Young Investigator Award (ONR-YIP),"1,200,000",,2012,2015
+CHIMP: the CMU Highly Intelligent Mobile Platform, "Defense Advanced Research Projects Agency (\#DARPA-BAA-12-39)",Robotics Challenge Track A, "400,000",Tony Stenz, 2012,2015
+Lifelong Learning in the Real World,Intel,Embedded Computing Science and Technology Center,"200,000",,2012,2014
+"In-hand manipulation with a simple gripper",ABB,Research Grant,"200,000", Matt Mason,2013,2014
+"ANDY: Learning for Autonomous Robotic Manipulation","Defense Advanced Research Projects Agency (\#DARPA-BAA-10-28)",Autonomous Robotic Manipulation Software Track,"300,000",Drew Bagnell,2011,2013
+"REARM: Robust Extensible Autonomous Robotic Manipulation","Defense Advanced Research Projects Agency (\#DARPA-BAA-10-28)", Autonomous Robotic Manipulation Software Track,"300,000",SRI,2010,2011
+"Robotics-enhanced, Cost-effective Motion Test Equipment for Inertial MEMS Devices",Research for Advanced Manufacturing in Pennsylvania,Research Grant,"200,000",David Bourne,2013,2014
+Addressing Clutter and Uncertainty for Robotic Manipulation in Human Environments, "National Science Foundation (\#1208388)", National Robotics Initiative,"150,456",,2012,2013
+Building Intelligent Mobile Manipulators for Assistive Care,"National Science Foundation (\#1228906)","Robust Intelligence, Division of Information \& Intelligent Systems","24,808",Matt Mason,2012,2013
+Methodology for Applying Haptic Robotics to Agile Manufacturing,"National Science Foundation (\#0646448)", "Small Business Phase II , Division of Industrial Innovation \& Partnerships","99,785",William Townsend,2009,2012
+A Simple but General Hand,"National Science Foundation (\#0916557)","Robust Intelligence, Division of Information \& Intelligent Systems","515,079",Matt Mason,2009,2013
+Quality of Life Technology Engineering Research Center,"National Science Foundation (\#0540865)",Engineering Research Centers,"16,105,954",Takeo Kanade,2006,2016
