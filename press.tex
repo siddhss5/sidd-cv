@@ -1,81 +1,13 @@
 % !TEX root = sidd-cv.tex
 
 \section{Selected Press Coverage (\href{https://personalrobotics.cs.washington.edu/press/}{Longer list})}
-\begin{tabularx}{\linewidth}{rX}
-\multicolumn{2}{c}{2019}\\ 
-Fast Company & The best interactive design of the year\\
-Geek Wire & Robotic race car platform from Univ. of Washington designed to speed research around A.I.\\
-BBC News & Robot arm can feed people with mobility issues\\
-\end{tabularx}
 
-\begin{tabularx}{\linewidth}{rX}
-\multicolumn{2}{c}{2018}\\ 
-MIT Tech Review & Research robots sometimes left unsecured on the internet, study finds\\
-KUOW Public Radio & The Record: Robotics\\
-Washington Post & An expert explains how close we are to 'The Jetsons.'\\
-GeekWire & UW’s HERB robot makes cameo on X-Files as automated sushi waiter\\
-\end{tabularx}
-\begin{tabularx}{\linewidth}{rX}
-\multicolumn{2}{c}{2017 (moved to UW)}\\ 
-BBC World Live & Autonomous Weapons that use AI\\
-IEEE The Institute &  IEEE Members Build Robots to Help People with Disabilities Live Independently\\
-New York Times & Learning to love our robot co-workers\\
-GeekWire & Robotics expert moves entire team to UW, including famous Oreo-cracking robot\\
-\end{tabularx}
-\begin{tabularx}{\linewidth}{rX}
-\multicolumn{2}{c}{2016}\\ 
-Wired &  Come on, Let’s Give the Robots Hands Already\\
-Discovery Channel &    Robot Vision\\
-Yahoo Tech & Meet the man building HERB -- the closest thing we have to Rosie the Robot\\
-Huffpost Tech &  Robot Butler's Creativity Surprises Its Own Makers\\
-Tech Republic &  What Zuckerberg can learn from CMU's HERB\\
-\end{tabularx}
-\begin{tabularx}{\linewidth}{rX}
-\multicolumn{2}{c}{2015}\\ 
-USA Today &  Where the Jobs Are: Workers vs Automation\\
-The Guardian  & Robots are leaving the factory floor and heading for your desk –- and your job\\
-New York Times Magazine & Uber Would Like to Buy Your Robotics Department\\
-Pittsburgh Post-Gazette & 'Robots' like you have never seen them before\\
-\end{tabularx}
-\begin{tabularx}{\linewidth}{rX}
-\multicolumn{2}{c}{2014}\\ 
-National Geographic & Robots 3D IMAX Movie\\
-Washington Post & HERB: A robot that can unload a dishwasher and (sometimes) take apart an Oreo\\
-National Geographic & Going Deep with David Rees: How to open a door\\
-The Verge & Robot city: how the machines are driving Pittsburgh's future\\
-Pittsburgh Post Gazette & CMU play pairs HERB the robot with human actor\\
-Politico & Robots at Work\\
-Discovery Channel & When Will My Robotic Housekeeper Be Ready?\\
-NPR & Robots that Care: The Quality of Life Technology Center Changing the World of Caregiving\\
-\end{tabularx}
-\begin{tabularx}{\linewidth}{rX}
-\multicolumn{2}{c}{2013}\\ 
-CNN & When it's too hard to separate Oreos...\\
-Discovery Channel & 	Autonomous Robot Comprehends Objects On Its Own\\
-New York Times & Disruptions: Helper Robots Are Steered, Tentatively, to Care for the Aging\\
-Wall Street Journal & Not the Jetsons, but Rosie could be your nurse\\
-Time Magazine & Welcome to Roboburgh\\
-CBS & Robotic Servants are here to help\\
-\end{tabularx}
-\begin{tabularx}{\linewidth}{rX}
-\multicolumn{2}{c}{2012}\\ 
-Engadget & {Robotic butlers, bartenders and receptionists at Carnegie Mellon}\\
-Popular Science & {HERB the Robot Butler Microwaves Your Dinner For You}\\
-Time Magazine & {Meet HERB, the Robot Butler That Knows How to Use a Microwave}\\
-Fast Company & {This Week In Bots: Will Your Kids Give Robots Civil Liberties?}\\
-NPR & {Marketplace: Good Robots Make Jobs}\\
-National Geographic & {Us. And them.
-Robots are being created that can think, act, and relate to humans. Are we ready?}\\
-\end{tabularx}
-\begin{tabularx}{\linewidth}{rX}
-\multicolumn{2}{c}{2007-2011 (At Intel)}\\ 
-NSF Science Nation & {HERB: A robot to help around the house}\\
-Scientific American & {Can Robots Be Programmed to Learn from Their Own Experiences?}\\
-BBC & {The dawn of intelligent machines}\\
-Businessweek & {World's most advanced robots}\\
-Fast Company & {Intel's Robot Butler Serves, Clears, and Does Dishes}\\
-Wired Magazine & {Butler Robot Can Fetch Drinks, Snacks}\\
-Granta & {What I think about when I think about robots}\\
-Discovery Channel & {The robot butler}\\
-Popular Science & {Rise of the Helpful Machines: Meet 10 of the most advanced human-assist 'bots from around the world}\\
-\end{tabularx}
+
+\DTLsort{Year=descending}{press}
+\noindent
+\DTLforeach*{press}
+{\title=Title,\source=Source,\year=Year,\link=Link}
+{
+\href{\link}{\title} \hfill \source, \year
+\\
+}
