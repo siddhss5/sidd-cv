@@ -4,7 +4,7 @@
 \section{Mentoring} 
 
 \subsection{Current Ph.D. Students}
-\DTLsort{Start=descending}{students-phd}
+\DTLsort{Start=descending,Finish=descending}{students-phd}
 \noindent
 \DTLforeach*[\DTLiseq{\finish}{}]{students-phd}
 {\name=Name,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish}
@@ -13,7 +13,7 @@
 }
 
 \subsection{Current Postdoctoral Fellows}
-\DTLsort{Start=descending}{postdocs}
+\DTLsort{Start=descending,Finish=descending}{postdocs}
 \noindent
 \DTLforeach*[\DTLiseq{\finish}{}]{postdocs}
 {\name=Name,\coadvisor=Coadvisor,\start=Start,\finish=Finish,\nowat=NowAt}
