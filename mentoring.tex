@@ -3,6 +3,12 @@
 
 \section{Mentoring} 
 
+\newif\ifhascurrentphd
+\hascurrentphdfalse
+\DTLforeach*[\DTLiseq{\finish}{}]{students-phd}
+{\name=Name,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish}
+{\hascurrentphdtrue}
+\ifhascurrentphd
 \subsection{Current Ph.D. Students}
 \noindent
 \DTLforeach*[\DTLiseq{\finish}{}]{students-phd}
@@ -10,7 +16,14 @@
 {\name~\DTLifnullorempty{\coadvisor}{}{(+\coadvisor)} \hfill \start-\\
 \DTLifnullorempty{\title}{}{\textit{\title}\\}
 }
+\fi
 
+\newif\ifhascurrentpostdocs
+\hascurrentpostdocsfalse
+\DTLforeach*[\DTLiseq{\finish}{}]{postdocs}
+{\name=Name,\coadvisor=Coadvisor,\start=Start,\finish=Finish,\nowat=NowAt}
+{\hascurrentpostdocstrue}
+\ifhascurrentpostdocs
 \subsection{Current Postdoctoral Fellows}
 \noindent
 \DTLforeach*[\DTLiseq{\finish}{}]{postdocs}
@@ -18,6 +31,7 @@
 {\name~\DTLifnullorempty{\coadvisor}{}{(+\coadvisor)} \hfill \start-\\
 \DTLifnullorempty{\nowat}{}{\rightline{Next: \nowat}\\}
 }
+\fi
 
 \subsection{Alumni - Postdoctoral Fellows}
 \noindent
