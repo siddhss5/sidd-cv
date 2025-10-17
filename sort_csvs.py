@@ -22,6 +22,7 @@ DEFAULT_SORTS = {
     "data/interns-undergrad.csv": [("Finish", "desc")],
     "data/grants.csv": [("Start", "desc"), ("Finish", "desc")],
     "data/press.csv": [("Year", "desc")],
+    "data/awards.csv": [("Year", "desc")],
 }
 
 # ---------------------------------------------------------------------
