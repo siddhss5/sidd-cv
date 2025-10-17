@@ -1,5 +1,5 @@
 # latexmkrc configuration for sidd-cv
-# Automatically sort CSV files before LaTeX compilation
+# Intelligently sort CSV files only when needed
 
 # Use pdflatex as the default engine
 $pdf_mode = 1;
@@ -13,5 +13,5 @@ $extra_watch_files = "data/*.csv";
 # Force rebuild if CSV files change
 $force_mode = 1;
 
-# Custom build sequence: sort CSV files first, then compile
-$pdflatex = "python3 sort_csvs.py && pdflatex %O %S";
+# Custom build sequence: conditionally sort CSV files, then compile
+$pdflatex = "if [ data/*.csv -nt data/.last_sorted ] 2>/dev/null || [ ! -f data/.last_sorted ]; then python3 sort_csvs.py && touch data/.last_sorted; fi && pdflatex %O %S";
