@@ -1,0 +1,42 @@
+name: Build CV (Simple)
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup TeX Live
+      uses: dante-ev/docker-texlive-action@v1
+      with:
+        texlive-version: 2023
+        packages: |
+          collection-latexextra
+          collection-bibtexextra
+          datatool
+          latexmk
+          
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Sort CSV files
+      run: python3 sort_csvs.py
+      
+    - name: Build PDF
+      run: latexmk -pdf -interaction=nonstopmode sidd-cv.tex
+      
+    - name: Upload PDF
+      uses: actions/upload-artifact@v3
+      with:
+        name: cv-pdf
+        path: sidd-cv.pdf

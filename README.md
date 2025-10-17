@@ -162,6 +162,25 @@ DEFAULT_SORTS = {
 }
 ```
 
+## GitHub Actions
+
+This repository includes automated PDF building via GitHub Actions:
+
+### Automatic Builds
+- **Triggers**: Every push to `master`/`main` branch and pull requests
+- **Actions**: 
+  - Sorts CSV files using the Python script
+  - Compiles PDF using latexmk
+  - Uploads PDF as a downloadable artifact
+
+### Workflow File
+- `.github/workflows/build.yml` - Automated build workflow
+
+### Accessing Built PDFs
+1. Go to the **Actions** tab in the GitHub repository
+2. Click on the latest workflow run
+3. Download the PDF from the **Artifacts** section
+
 ## License
 
 This CV template and data are for personal use by Siddhartha Srinivasa.
