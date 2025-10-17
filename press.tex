@@ -2,8 +2,8 @@
 
 \section{Selected Press Coverage (\href{https://personalrobotics.cs.washington.edu/press/}{Longer list})}
 
+\DTLloaddb{press}{data/press.csv}
 
-\DTLsort{Year=descending}{press}
 \noindent
 \DTLforeach*{press}
 {\title=Title,\source=Source,\year=Year,\link=Link}

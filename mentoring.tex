@@ -4,7 +4,6 @@
 \section{Mentoring} 
 
 \subsection{Current Ph.D. Students}
-\DTLsort{Start=descending,Finish=descending}{students-phd}
 \noindent
 \DTLforeach*[\DTLiseq{\finish}{}]{students-phd}
 {\name=Name,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish}
@@ -13,7 +12,6 @@
 }
 
 \subsection{Current Postdoctoral Fellows}
-\DTLsort{Start=descending,Finish=descending}{postdocs}
 \noindent
 \DTLforeach*[\DTLiseq{\finish}{}]{postdocs}
 {\name=Name,\coadvisor=Coadvisor,\start=Start,\finish=Finish,\nowat=NowAt}
@@ -22,7 +20,6 @@
 }
 
 \subsection{Alumni - Postdoctoral Fellows}
-\DTLsort{Finish=descending}{postdocs}
 \noindent
 \DTLforeach*[\NOT \DTLiseq{\finish}{}]{postdocs}
 {\name=Name,\coadvisor=Coadvisor,\start=Start,\finish=Finish,\nowat=NowAt}
@@ -32,7 +29,6 @@
 
 
 \subsection{Alumni - Ph.D.}
-\DTLsort{Finish=descending}{students-phd}
 \noindent
 \DTLforeach*[\NOT \DTLiseq{\finish}{}]{students-phd}
 {\name=Name,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish,\nowat=NowAt}
@@ -42,7 +38,6 @@
 \\}
 
 \subsection{Alumni - M.S.}
-\DTLsort{Finish=descending}{students-ms}
 \noindent
 \DTLforeach*[\NOT \DTLiseq{\finish}{}]{students-ms}
 {\name=Name,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish,\nowat=NowAt}
@@ -75,7 +70,6 @@ Research: \textit{Multi-Step Mobile Manipulation }\hfill CTO @ Agility\\
 
 
 \subsection{Graduate Interns}
-\DTLsort{Year=descending}{interns-grad}
 \noindent
 \DTLforeach*{interns-grad}
 {\name=Name,\from=From,\year=Year}
@@ -83,7 +77,6 @@ Research: \textit{Multi-Step Mobile Manipulation }\hfill CTO @ Agility\\
 }
 
 \subsection{Undergraduate Interns}
-\DTLsort{Finish=descending}{interns-undergrad}
 \noindent
 \DTLforeach*{interns-undergrad}
 {\name=Name,\from=From,\start=Start,\finish=Finish}
