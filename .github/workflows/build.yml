@@ -34,3 +34,15 @@ jobs:
       with:
         name: cv-pdf
         path: sidd-cv.pdf
+        
+    - name: Commit and push PDF
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add sidd-cv.pdf
+        if git diff --staged --quiet; then
+          echo "No changes to PDF"
+        else
+          git commit -m "Auto-update CV PDF [skip ci]"
+          git push
+        fi
