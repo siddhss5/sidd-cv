@@ -14,16 +14,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
       
-    - name: Setup TeX Live
-      uses: aminya/setup-tex@v1
-      with:
-        texlive-version: 2023
-        packages: |
-          collection-latexextra
-          collection-bibtexextra
-          datatool
-          latexmk
-          
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
@@ -32,8 +22,12 @@ jobs:
     - name: Sort CSV files
       run: python3 sort_csvs.py
       
-    - name: Build PDF
-      run: latexmk -pdf -interaction=nonstopmode sidd-cv.tex
+    - name: Compile LaTeX document
+      uses: xu-cheng/latex-action@v4
+      with:
+        root_file: sidd-cv.tex
+        latexmk_use_xelatex: false
+        latexmk_shell_escape: false
       
     - name: Upload PDF
       uses: actions/upload-artifact@v4
