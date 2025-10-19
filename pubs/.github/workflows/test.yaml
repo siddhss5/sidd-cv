@@ -17,11 +17,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout pubs
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         path: pubs
     - name: Checkout prl-website
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         token: ${{ secrets.READ_PAT }}
         ref: master
