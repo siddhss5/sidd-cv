@@ -18,6 +18,21 @@
 }
 \fi
 
+\newif\ifhascurrentms
+\hascurrentmsfalse
+\DTLforeach*[\DTLiseq{\finish}{}]{students-ms}
+{\name=Name,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish}
+{\hascurrentmstrue}
+\ifhascurrentms
+\subsection{Current M.S. Students}
+\noindent
+\DTLforeach*[\DTLiseq{\finish}{}]{students-ms}
+{\name=Name,\coadvisor=Coadvisor,\title=Title,\start=Start,\finish=Finish}
+{\name~\DTLifnullorempty{\coadvisor}{}{(+\coadvisor)} \hfill \start-\\
+\DTLifnullorempty{\title}{}{\textit{\title}\\}
+}
+\fi
+
 \newif\ifhascurrentpostdocs
 \hascurrentpostdocsfalse
 \DTLforeach*[\DTLiseq{\finish}{}]{postdocs}
