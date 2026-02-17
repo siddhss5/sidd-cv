@@ -250,10 +250,19 @@ Nathan Ratliff (CMU) #h(1fr) 2004-09\
   #link(item.at("Link"))[#item.at("Title")] #h(1fr) #item.at("Source"), #item.at("Year")\
 ]
 
-// Publications Section
-// Note: For the full implementation, we would add bibliography with author filtering
-// For now, just adding section headers as placeholders
+// Grants Section
+= Grants (excludes unrestricted gifts)
 
+#let grants_raw = csv("data/grants.csv")
+#let grants = csv_to_dict(grants_raw)
+#for grant in grants [
+  #grant.at("Funder") #h(1fr) #grant.at("Start")-#grant.at("Finish")\
+  _#grant.at("Title")_ #h(1fr) #if grant.at("PI") == "" [PI] else [co-PI, PI: #grant.at("PI")]\
+  #grant.at("Program")\
+  \
+]
+
+// Publications Section
 = Publications (#link("https://scholar.google.com/citations?user=RCi98EAAAAAJ&hl=en")[Google Scholar])
 
-_Publications section to be implemented with BibTeX bibliography and author filtering._
+_Publications section placeholder - to be implemented with BibTeX bibliography and author filtering._
