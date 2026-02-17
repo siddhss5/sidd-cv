@@ -6,3 +6,12 @@
 *.fdb_latexmk
 *.fls
 *.synctex.gz
+
+# Generated CSV files from YAML (grants.csv is hand-edited and tracked)
+data/students-phd.csv
+data/students-ms.csv
+data/postdocs.csv
+data/interns-grad.csv
+data/interns-undergrad.csv
+data/awards.csv
+data/press.csv
