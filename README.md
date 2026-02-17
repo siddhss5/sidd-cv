@@ -1,11 +1,14 @@
 # Siddhartha Srinivasa CV
 
-This repository contains the LaTeX source for Siddhartha Srinivasa's academic CV, including automated data sorting and compilation workflows.
+This repository contains the LaTeX source for Siddhartha Srinivasa's academic CV with automated YAML-to-CSV conversion and cross-repository build triggers.
 
 ## Quick Start
 
 ```bash
-# Build the CV (automatically sorts CSV data first)
+# Generate CSV files from YAML data (from website repo)
+python3 yaml2csv.py --owner siddhss5 --repo siddhss5.github.io --branch main --output-dir data/
+
+# Build the CV
 latexmk -pdf sidd-cv.tex
 
 # Clean auxiliary files
@@ -14,9 +17,10 @@ latexmk -c
 
 ## Features
 
-- **Automated CSV Sorting**: Python script automatically sorts all data files before LaTeX compilation
-- **No Manual Sorting**: Removed all `DTLsort` commands from LaTeX files
-- **Smart Rebuilding**: `latexmk` only rebuilds when files actually change
+- **YAML Source of Truth**: Data sourced from [website repo](https://github.com/siddhss5/siddhss5.github.io) YAML files
+- **Automated CSV Generation**: Python script fetches YAML and generates sorted CSV files
+- **Cross-Repo Automation**: CV automatically rebuilds when YAML files change in website repo
+- **Smart Sorting**: Built-in sorting eliminates need for manual data ordering
 - **Full Bibliography Support**: Handles journals, conferences, and miscellaneous publications
 - **URL Support**: Clickable links in press coverage section
 
@@ -24,16 +28,17 @@ latexmk -c
 
 ```
 ├── sidd-cv.tex              # Main CV document
-├── sort_csvs.py             # Python script for sorting CSV files
+├── yaml2csv.py              # Script to convert YAML → CSV
 ├── latexmkrc                # latexmk configuration
-├── data/                    # CSV data files
-│   ├── students-phd.csv     # PhD students
-│   ├── students-ms.csv      # MS students  
-│   ├── postdocs.csv         # Postdoctoral fellows
-│   ├── interns-grad.csv     # Graduate interns
-│   ├── interns-undergrad.csv # Undergraduate interns
-│   ├── grants.csv           # Research grants
-│   └── press.csv            # Press coverage
+├── data/                    # CSV data files (generated from YAML)
+│   ├── students-phd.csv     # PhD students (generated)
+│   ├── students-ms.csv      # MS students (generated)
+│   ├── postdocs.csv         # Postdoctoral fellows (generated)
+│   ├── interns-grad.csv     # Graduate interns (generated)
+│   ├── interns-undergrad.csv # Undergraduate interns (generated)
+│   ├── grants.csv           # Research grants (hand-edited)
+│   ├── awards.csv           # Awards (generated)
+│   └── press.csv            # Press coverage (generated)
 ├── pubs/                    # Bibliography files
 │   ├── siddpubs-journal.bib
 │   ├── siddpubs-conf.bib
@@ -43,28 +48,29 @@ latexmk -c
 
 ## Data Management
 
-### CSV Files
-All data is stored in CSV files in the `data/` directory. The Python script automatically sorts them according to these rules:
+### YAML Source of Truth
+Most CV data is maintained in YAML files in the [website repository](https://github.com/siddhss5/siddhss5.github.io):
+- `data/people.yaml` - PhD students, MS students, postdocs, interns
+- `data/awards.yaml` - Awards and honors
+- `data/press.yaml` - Press coverage
 
-- **`students-phd.csv`**: Sorted by Finish:desc, Start:desc
-- **`students-ms.csv`**: Sorted by Finish:desc
-- **`postdocs.csv`**: Sorted by Start:desc, Finish:desc
-- **`interns-grad.csv`**: Sorted by Year:desc
-- **`interns-undergrad.csv`**: Sorted by Finish:desc
-- **`grants.csv`**: Sorted by Start:desc, Finish:desc
-- **`press.csv`**: Sorted by Year:desc
+**Exception**: `data/grants.csv` remains hand-edited in this repository.
 
-### Manual Sorting
-To sort CSV files manually:
+### Generating CSV Files
+Run `yaml2csv.py` to fetch YAML from the website repo and generate CSV files:
+
 ```bash
-python3 sort_csvs.py
+python3 yaml2csv.py --owner siddhss5 --repo siddhss5.github.io --branch main --output-dir data/
 ```
 
-To sort a specific file with custom rules:
-```bash
-python3 sort_csvs.py data/press.csv Year:desc
-python3 sort_csvs.py data/students-phd.csv Finish:desc,Start:desc
-```
+The script automatically:
+- Fetches latest YAML data from website repo
+- Converts YAML to CSV format that LaTeX datatool expects
+- Applies proper sorting (e.g., PhD students by Finish:desc, Start:desc)
+- Handles current vs. alumni distinctions (empty end_year fields)
+
+### Automated Updates
+The CV automatically rebuilds when YAML files change in the website repo via GitHub Actions `repository_dispatch`. No manual intervention needed!
 
 ## Compilation
 
@@ -82,13 +88,13 @@ latexmk -c
 
 ### Manual Compilation
 ```bash
-# Sort CSV files first
-python3 sort_csvs.py
+# Generate CSV files from YAML first
+python3 yaml2csv.py --owner siddhss5 --repo siddhss5.github.io --branch main --output-dir data/
 
 # Compile LaTeX
 pdflatex sidd-cv.tex
 bibtex jour
-bibtex conf  
+bibtex conf
 bibtex misc
 pdflatex sidd-cv.tex
 pdflatex sidd-cv.tex
@@ -98,32 +104,36 @@ pdflatex sidd-cv.tex
 
 ### latexmkrc
 The `latexmkrc` file configures the build process:
-- Automatically runs `python3 sort_csvs.py` before compilation
 - Monitors CSV files for changes
 - Uses pdflatex as the default engine
 - Cleans auxiliary files automatically
 
-### sort_csvs.py
-The Python script handles CSV sorting with:
-- Default sort configurations for all data files
-- Command-line interface for custom sorting
-- Robust error handling for missing files
-- In-place sorting (replaces original files)
+### yaml2csv.py
+The Python script handles YAML-to-CSV conversion:
+- Fetches YAML files from website repo via GitHub API
+- Maps YAML fields to CSV columns (e.g., `co_advisor` → `Coadvisor`)
+- Applies sorting rules for each data type
+- Handles empty fields correctly (e.g., current students have no end_year)
+- Gracefully handles missing data (e.g., interns not yet in YAML)
 
 ## Dependencies
 
 - **LaTeX**: TeX Live 2025 or later
-- **Python 3**: For CSV sorting script
+- **Python 3.9+**: For yaml2csv.py script
+- **PyYAML**: Install with `pip install pyyaml`
 - **latexmk**: For automated compilation
 - **datatool**: LaTeX package for CSV processing
 
 ## Troubleshooting
 
-### CSV Sorting Issues
-If CSV files aren't being sorted:
+### CSV Generation Issues
+If CSV files aren't being generated:
 ```bash
-# Check if Python script runs
-python3 sort_csvs.py
+# Check if yaml2csv.py runs
+python3 yaml2csv.py --owner siddhss5 --repo siddhss5.github.io --branch main --output-dir data/
+
+# Verify PyYAML is installed
+pip install pyyaml
 
 # Force rebuild with latexmk
 latexmk -pdf -g sidd-cv.tex
@@ -149,15 +159,16 @@ latexmk -pdf -g sidd-cv.tex
 ## Development
 
 ### Adding New Data
-1. Add entries to the appropriate CSV file in `data/`
-2. Run `latexmk -pdf sidd-cv.tex` to rebuild
-3. The Python script will automatically sort the new data
+1. **For people, awards, press**: Edit YAML files in the [website repo](https://github.com/siddhss5/siddhss5.github.io)
+   - Push changes to trigger automatic CV rebuild via repository_dispatch
+2. **For grants**: Edit `data/grants.csv` directly in this repo (hand-edited)
+3. Run `latexmk -pdf sidd-cv.tex` to rebuild locally
 
 ### Modifying Sort Order
-Edit the `DEFAULT_SORTS` dictionary in `sort_csvs.py`:
+Edit the `SORT_SPECS` dictionary in `yaml2csv.py`:
 ```python
-DEFAULT_SORTS = {
-    "data/students-phd.csv": [("Finish", "desc"), ("Start", "desc")],
+SORT_SPECS = {
+    "students-phd.csv": [("Finish", "desc"), ("Start", "desc")],
     # Add or modify sort rules here
 }
 ```
@@ -167,19 +178,30 @@ DEFAULT_SORTS = {
 This repository includes automated PDF building via GitHub Actions:
 
 ### Automatic Builds
-- **Triggers**: Every push to `master`/`main` branch and pull requests
-- **Actions**: 
-  - Sorts CSV files using the Python script
+- **Triggers**:
+  - Push to `master`/`main` branch
+  - Pull requests
+  - Repository dispatch from website repo (when YAML files change)
+  - Manual workflow dispatch
+- **Actions**:
+  - Fetches YAML files from website repo
+  - Converts YAML to CSV using yaml2csv.py
   - Compiles PDF using latexmk
-  - Uploads PDF as a downloadable artifact
+  - Commits updated PDF back to repo
 
-### Workflow File
-- `.github/workflows/build.yml` - Automated build workflow
+### Cross-Repository Automation
+When YAML files are updated in the website repo:
+1. Website repo workflow sends `repository_dispatch` event
+2. CV repo workflow triggers automatically
+3. Fresh CSV files are generated from latest YAML
+4. PDF is rebuilt and committed
 
-### Accessing Built PDFs
-1. Go to the **Actions** tab in the GitHub repository
-2. Click on the latest workflow run
-3. Download the PDF from the **Artifacts** section
+### Workflow Files
+- `.github/workflows/build.yml` - CV build workflow (this repo)
+- `.github/workflows/trigger-cv-build.yml` - Trigger workflow (website repo)
+
+### Setup Requirements
+The website repo needs a `CV_REPO_PAT` secret (Personal Access Token) with `repo` scope to trigger builds in this repo.
 
 ## License
 

@@ -1,0 +1,42 @@
+name: Trigger CV Build
+
+# This workflow should be added to the website repo at:
+# .github/workflows/trigger-cv-build.yml
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'data/people.yaml'
+      - 'data/awards.yaml'
+      - 'data/press.yaml'
+
+jobs:
+  trigger-cv-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger CV repository build
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.CV_REPO_PAT }}
+          repository: siddhss5/sidd-cv
+          event-type: yaml-updated
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+
+# Setup Instructions:
+# 1. Create a Personal Access Token (PAT) with 'repo' scope:
+#    - Go to GitHub Settings → Developer settings → Personal access tokens → Fine-grained tokens
+#    - Create new token with access to siddhss5/sidd-cv repository
+#    - Grant Actions: write permission
+#
+# 2. Add the PAT as a secret in the website repository:
+#    - Go to website repo Settings → Secrets and variables → Actions
+#    - Click "New repository secret"
+#    - Name: CV_REPO_PAT
+#    - Value: <paste your PAT>
+#
+# 3. Copy this file to website repo:
+#    - Create .github/workflows/ directory if it doesn't exist
+#    - Save this file as .github/workflows/trigger-cv-build.yml
+#    - Commit and push
