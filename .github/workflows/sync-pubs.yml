@@ -1,0 +1,70 @@
+name: Sync Publications
+
+# Auto-sync publications from personalrobotics/pubs repository
+# Runs weekly on Mondays at 9am UTC, or manually via workflow_dispatch
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Every Monday at 9am UTC
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  sync-pubs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Fetch latest publications
+      run: |
+        cd pubs
+        for file in siddpubs-journal.bib siddpubs-conf.bib siddpubs-misc.bib; do
+          echo "📥 Fetching ${file}..."
+          curl -sf "https://raw.githubusercontent.com/personalrobotics/pubs/master/${file}" -o "${file}"
+          echo "✅ Updated ${file}"
+        done
+        cd ..
+
+    - name: Check for changes
+      id: changes
+      run: |
+        if git diff --quiet pubs/*.bib; then
+          echo "changed=false" >> $GITHUB_OUTPUT
+          echo "📄 No publication updates"
+        else
+          echo "changed=true" >> $GITHUB_OUTPUT
+          echo "📝 Publications updated"
+          git diff --stat pubs/*.bib
+        fi
+
+    - name: Setup Python
+      if: steps.changes.outputs.changed == 'true'
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      if: steps.changes.outputs.changed == 'true'
+      run: pip install pyyaml
+
+    - name: Generate CSV files
+      if: steps.changes.outputs.changed == 'true'
+      run: python3 yaml2csv.py --owner siddhss5 --repo siddhss5.github.io --branch main --output-dir data/
+
+    - name: Compile CV
+      if: steps.changes.outputs.changed == 'true'
+      uses: xu-cheng/latex-action@v4
+      with:
+        root_file: sidd-cv.tex
+        latexmk_use_xelatex: false
+        latexmk_shell_escape: false
+
+    - name: Commit and push changes
+      if: steps.changes.outputs.changed == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add pubs/*.bib sidd-cv.pdf
+        git commit -m "Sync publications from personalrobotics/pubs [skip ci]"
+        git push

@@ -5,14 +5,17 @@ This repository contains the LaTeX source for Siddhartha Srinivasa's academic CV
 ## Quick Start
 
 ```bash
-# Generate CSV files from YAML data (from website repo)
+# Using Makefile (recommended)
+make all              # Sync data + pubs + build CV
+make sync-data        # Fetch latest YAML and generate CSVs
+make sync-pubs        # Fetch latest publications
+make build            # Build CV PDF
+make clean            # Clean auxiliary files
+make test             # Validate YAML data
+
+# Or use individual commands
 python3 yaml2csv.py --owner siddhss5 --repo siddhss5.github.io --branch main --output-dir data/
-
-# Build the CV
 latexmk -pdf sidd-cv.tex
-
-# Clean auxiliary files
-latexmk -c
 ```
 
 ## Features
@@ -217,12 +220,17 @@ The `pubs/` directory contains BibTeX files for different publication types:
 
 **To update publications:**
 
-1. Edit the appropriate `.bib` file directly
-2. Run `latexmk -pdf sidd-cv.tex` to rebuild the CV
-3. Verify the changes in the generated PDF
-4. Commit both the `.bib` changes and the regenerated `sidd-cv.pdf`
+**Option 1: Automatic sync (recommended)**
+- Publications auto-sync weekly via GitHub Actions
+- Or run manually: `make sync-pubs` / `./sync-pubs.sh`
 
-**Note**: The `pubs/` directory is tracked directly in this repository (not a submodule).
+**Option 2: Manual editing**
+1. Edit the appropriate `.bib` file directly
+2. Run `make build` or `latexmk -pdf sidd-cv.tex` to rebuild
+3. Verify changes in the generated PDF
+4. Commit both `.bib` changes and `sidd-cv.pdf`
+
+**Note**: The `pubs/` directory is tracked directly in this repository (not a submodule). Publications are synced from [personalrobotics/pubs](https://github.com/personalrobotics/pubs).
 
 ## Troubleshooting
 
@@ -294,6 +302,7 @@ When YAML files are updated in the website repo:
 
 ### Workflow Files
 - `.github/workflows/build.yml` - CV build workflow (this repo)
+- `.github/workflows/sync-pubs.yml` - Weekly publication sync (this repo)
 - `.github/workflows/trigger-cv-build.yml` - Trigger workflow (website repo)
 
 ### Setup Requirements
