@@ -44,11 +44,13 @@ def fetch_yaml(owner: str, repo: str, branch: str, file_path: str) -> Any:
             return yaml.safe_load(response.read())
     except HTTPError as e:
         if e.code == 404:
-            print(f"⚠️  {file_path} not found in {owner}/{repo}")
+            print(f"❌ {file_path} not found in {owner}/{repo}/{branch}")
+            print(f"   Check: https://github.com/{owner}/{repo}/blob/{branch}/{file_path}")
             return None
         raise
     except URLError as e:
         print(f"❌ Error fetching {file_path}: {e}")
+        print(f"   URL: {url}")
         raise
 
 
@@ -58,6 +60,64 @@ def extract_bibtex_key(pub_link: str) -> str:
         return ""
     # Strip /publications/# prefix
     return pub_link.replace("/publications/#", "").replace("/publications/", "")
+
+
+def validate_person(person: Dict, index: int) -> bool:
+    """Validate person data structure."""
+    required = ["name", "role"]
+    missing = [f for f in required if not person.get(f)]
+    if missing:
+        print(f"⚠️  Person {index}: Missing required fields: {missing}")
+        return False
+    return True
+
+
+def validate_award(award: Dict, index: int) -> bool:
+    """Validate award data structure."""
+    required = ["award", "year"]
+    missing = [f for f in required if not award.get(f)]
+    if missing:
+        print(f"⚠️  Award {index}: Missing required fields: {missing}")
+        return False
+    return True
+
+
+def validate_press_item(item: Dict, index: int) -> bool:
+    """Validate press item data structure."""
+    required = ["Title", "Source", "Year"]
+    missing = [f for f in required if not item.get(f)]
+    if missing:
+        print(f"⚠️  Press item {index}: Missing required fields: {missing}")
+        return False
+    return True
+
+
+def validate_yaml_data(people_data: List[Dict], awards_data: List[Dict], press_data: List[Dict]) -> bool:
+    """Validate all YAML data structures."""
+    valid = True
+
+    if people_data:
+        print("\n🔍 Validating people.yaml...")
+        for i, person in enumerate(people_data):
+            if not validate_person(person, i):
+                valid = False
+        print(f"✅ Validated {len(people_data)} people entries")
+
+    if awards_data:
+        print("\n🔍 Validating awards.yaml...")
+        for i, award in enumerate(awards_data):
+            if not validate_award(award, i):
+                valid = False
+        print(f"✅ Validated {len(awards_data)} award entries")
+
+    if press_data:
+        print("\n🔍 Validating press.yaml...")
+        for i, item in enumerate(press_data):
+            if not validate_press_item(item, i):
+                valid = False
+        print(f"✅ Validated {len(press_data)} press entries")
+
+    return valid
 
 
 def sort_rows(rows: List[Dict[str, str]], sort_spec: List[Tuple[str, str]]) -> List[Dict[str, str]]:
@@ -224,6 +284,7 @@ def main():
     parser.add_argument("--repo", default="siddhss5.github.io", help="GitHub repository name")
     parser.add_argument("--branch", default="main", help="Git branch to fetch from")
     parser.add_argument("--output-dir", default="data", help="Output directory for CSV files")
+    parser.add_argument("--validate", action="store_true", help="Validate YAML structure without writing CSV files")
 
     args = parser.parse_args()
     output_dir = Path(args.output_dir)
@@ -235,6 +296,19 @@ def main():
     people_data = fetch_yaml(args.owner, args.repo, args.branch, "data/people.yaml")
     awards_data = fetch_yaml(args.owner, args.repo, args.branch, "data/awards.yaml")
     press_data = fetch_yaml(args.owner, args.repo, args.branch, "data/press.yaml")
+
+    # If validate-only mode, run validation and exit
+    if args.validate:
+        print("\n" + "="*50)
+        print("VALIDATION MODE")
+        print("="*50)
+        valid = validate_yaml_data(people_data or [], awards_data or [], press_data or [])
+        if valid:
+            print("\n✅ All YAML data is valid!")
+            sys.exit(0)
+        else:
+            print("\n❌ Validation failed - fix errors above")
+            sys.exit(1)
 
     # Convert and write CSV files
     if people_data:

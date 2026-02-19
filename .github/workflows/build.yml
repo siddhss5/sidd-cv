@@ -2,9 +2,9 @@ name: Build CV (Simple)
 
 on:
   push:
-    branches: [ master, main ]
+    branches: [ main ]
   pull_request:
-    branches: [ master, main ]
+    branches: [ main ]
   repository_dispatch:
     types: [yaml-updated]
   workflow_dispatch:
@@ -25,8 +25,23 @@ jobs:
     - name: Install Python dependencies
       run: pip install pyyaml
 
+    - name: Validate YAML data
+      run: python3 yaml2csv.py --owner siddhss5 --repo siddhss5.github.io --branch main --output-dir data/ --validate
+
     - name: Generate CSV files from YAML
       run: python3 yaml2csv.py --owner siddhss5 --repo siddhss5.github.io --branch main --output-dir data/
+
+    - name: Verify CSV files were generated
+      run: |
+        echo "Checking for required CSV files..."
+        for csv in students-phd students-ms postdocs awards press; do
+          if [ ! -f "data/${csv}.csv" ]; then
+            echo "❌ Missing data/${csv}.csv"
+            exit 1
+          fi
+          echo "✅ Found data/${csv}.csv"
+        done
+        echo "All required CSV files present"
       
     - name: Compile LaTeX document
       uses: xu-cheng/latex-action@v4
@@ -40,8 +55,22 @@ jobs:
       with:
         name: cv-pdf
         path: sidd-cv.pdf
-        
+
+    - name: Check PDF changes
+      id: pdf_diff
+      run: |
+        if git diff --quiet sidd-cv.pdf 2>/dev/null; then
+          echo "changed=false" >> $GITHUB_OUTPUT
+          echo "📄 CV PDF unchanged"
+        else
+          echo "changed=true" >> $GITHUB_OUTPUT
+          echo "📝 CV PDF updated in this build"
+          # Show file size for reference
+          ls -lh sidd-cv.pdf | awk '{print "   Size: " $5}'
+        fi
+
     - name: Commit and push PDF
+      if: steps.pdf_diff.outputs.changed == 'true'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"

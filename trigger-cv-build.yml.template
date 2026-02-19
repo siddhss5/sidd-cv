@@ -5,7 +5,7 @@ name: Trigger CV Build
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
     paths:
       - 'data/people.yaml'
       - 'data/awards.yaml'

@@ -173,13 +173,109 @@ SORT_SPECS = {
 }
 ```
 
+## Local Development
+
+### Python Environment Setup
+
+For development, it's recommended to use a virtual environment:
+
+```bash
+# Create virtual environment
+python3 -m venv venv
+
+# Activate virtual environment
+source venv/bin/activate  # On macOS/Linux
+# or: venv\Scripts\activate  # On Windows
+
+# Install dependencies
+pip install pyyaml
+```
+
+### Testing Changes Locally
+
+Before committing, test your changes:
+
+```bash
+# 1. Update CSV files from YAML
+python3 yaml2csv.py --owner siddhss5 --repo siddhss5.github.io --branch main --output-dir data/
+
+# 2. Compile the CV
+latexmk -pdf sidd-cv.tex
+
+# 3. Verify the PDF output
+open sidd-cv.pdf  # macOS
+# or: xdg-open sidd-cv.pdf  # Linux
+```
+
+### Managing Publications
+
+The `pubs/` directory contains BibTeX files for different publication types:
+
+- `siddpubs-journal.bib` - Journal papers
+- `siddpubs-conf.bib` - Conference papers
+- `siddpubs-misc.bib` - Technical reports, theses
+
+**To update publications:**
+
+1. Edit the appropriate `.bib` file directly
+2. Run `latexmk -pdf sidd-cv.tex` to rebuild the CV
+3. Verify the changes in the generated PDF
+4. Commit both the `.bib` changes and the regenerated `sidd-cv.pdf`
+
+**Note**: The `pubs/` directory is tracked directly in this repository (not a submodule).
+
+## Troubleshooting
+
+### "Missing CSV file" errors
+
+If LaTeX compilation fails with missing CSV errors:
+
+```bash
+# Regenerate all CSV files from YAML
+python3 yaml2csv.py --owner siddhss5 --repo siddhss5.github.io --branch main --output-dir data/
+
+# Force rebuild
+latexmk -pdf -g sidd-cv.tex
+```
+
+### "PyYAML not found" error
+
+```bash
+pip install pyyaml
+
+# If using system Python on macOS:
+python3 -m pip install --user pyyaml
+```
+
+### Bibliography not updating
+
+If publication changes aren't reflected:
+
+```bash
+# Clean all auxiliary files
+latexmk -c
+
+# Remove bibliography cache
+rm *.bbl *.blg *.aux
+
+# Force full rebuild
+latexmk -pdf -g sidd-cv.tex
+```
+
+### GitHub Actions build failing
+
+1. Check the [Actions tab](../../actions) for detailed error logs
+2. Verify YAML files are valid in the website repo
+3. Ensure `CV_REPO_PAT` secret is configured in website repo (for cross-repo triggers)
+4. Test locally with the same commands as CI uses
+
 ## GitHub Actions
 
 This repository includes automated PDF building via GitHub Actions:
 
 ### Automatic Builds
 - **Triggers**:
-  - Push to `master`/`main` branch
+  - Push to `main` branch
   - Pull requests
   - Repository dispatch from website repo (when YAML files change)
   - Manual workflow dispatch

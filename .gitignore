@@ -15,3 +15,6 @@ data/interns-grad.csv
 data/interns-undergrad.csv
 data/awards.csv
 data/press.csv
+
+# Generated combined bibliography (for Typst)
+pubs/siddpubs-all.bib
