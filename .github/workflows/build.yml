@@ -81,3 +81,18 @@ jobs:
           git commit -m "Auto-update CV PDF [skip ci]"
           git push
         fi
+    - name: Tell the website to rebuild
+      # The CV is already committed by the time this runs, and the website
+      # fetches it on its next build regardless, so a missing or expired PAT
+      # should not fail the pipeline - it shows as a failed step instead.
+      continue-on-error: true
+      if: steps.pdf_diff.outputs.changed == 'true'
+      uses: peter-evans/repository-dispatch@v3
+      with:
+        # Fine-grained PAT with Contents: write on siddhss5/siddhss5.github.io.
+        # Without it this step fails and the CV still lands here, just not there.
+        token: ${{ secrets.SITE_REPO_PAT }}
+        repository: siddhss5/siddhss5.github.io
+        event-type: cv-updated
+        client-payload: '{"sha": "${{ github.sha }}"}'
+
