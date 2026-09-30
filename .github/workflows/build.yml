@@ -70,7 +70,11 @@ jobs:
         fi
 
     - name: Commit and push PDF
-      if: steps.pdf_diff.outputs.changed == 'true'
+      # Only from main. A pull_request build checks out a detached merge ref, so
+      # `git push` there fails with "You are not currently on a branch" - and a
+      # PR has no business committing to main anyway. The PDF is still built and
+      # uploaded as an artifact above, which is what a PR wants.
+      if: steps.pdf_diff.outputs.changed == 'true' && github.ref == 'refs/heads/main'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
@@ -86,7 +90,7 @@ jobs:
       # fetches it on its next build regardless, so a missing or expired PAT
       # should not fail the pipeline - it shows as a failed step instead.
       continue-on-error: true
-      if: steps.pdf_diff.outputs.changed == 'true'
+      if: steps.pdf_diff.outputs.changed == 'true' && github.ref == 'refs/heads/main'
       uses: peter-evans/repository-dispatch@v3
       with:
         # Fine-grained PAT with Contents: write on siddhss5/siddhss5.github.io.
