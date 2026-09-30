@@ -5,12 +5,19 @@ yaml2csv.py — Convert YAML data from website repo to CSV files for LaTeX CV.
 Fetches YAML files (people.yaml, awards.yaml, press.yaml) from the website
 repository and generates corresponding CSV files that LaTeX datatool expects.
 
+A paper's awards are not in awards.yaml: they live in the `award` field of the
+paper's own BibTeX entry, and awards.yaml holds only awards a person holds, such
+as a fellowship or a chair. awards.csv is assembled from both, with the
+conference read from the entry's venue so that the award name stays just the
+award's name.
+
 Usage:
     python yaml2csv.py --owner siddhss5 --repo siddhss5.github.io --branch main --output-dir data/
 """
 
 import argparse
 import csv
+import re
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
@@ -62,6 +69,140 @@ def extract_bibtex_key(pub_link: str) -> str:
     return pub_link.replace("/publications/#", "").replace("/publications/", "")
 
 
+def read_bib_strings(text: str, prefer_short: bool = False) -> Dict[str, str]:
+    """Resolve a .bib file's @string macros.
+
+    These files define every venue twice — "{ACM/IEEE} {HRI}" and "{ACM/IEEE}
+    International Conference on Human-Robot Interaction" — and BibTeX uses the
+    last definition, which is the full name the website shows. A CV line has no
+    room for that, so prefer_short picks each macro's shortest definition
+    instead. Shortest rather than first, so reordering the blocks cannot
+    silently change the CV.
+    """
+    definitions: Dict[str, List[str]] = {}
+    macros: Dict[str, str] = {}
+    for match in re.finditer(r'@string\s*\{\s*(\w+)\s*=\s*(.+?)\}\s*(?=\n)', text, re.S):
+        name, raw = match.group(1), match.group(2)
+        parts = []
+        for piece in raw.split("#"):
+            piece = piece.strip()
+            if piece.startswith('"') and piece.endswith('"'):
+                parts.append(piece[1:-1])
+            elif piece in macros:
+                parts.append(macros[piece])
+            else:
+                parts.append(piece.strip('"'))
+        macros[name] = "".join(parts)
+        definitions.setdefault(name, []).append(macros[name])
+
+    if not prefer_short:
+        return macros
+    return {name: min(values, key=len) for name, values in definitions.items()}
+
+
+def strip_braces(value: str) -> str:
+    """Drop BibTeX's protective braces: '{ACM/IEEE} Conference' -> 'ACM/IEEE Conference'."""
+    return re.sub(r"[{}]", "", value).strip()
+
+
+def field_value(body: str, name: str, macros: Dict[str, str]) -> str:
+    """One field of an entry body, brace-matched, with macros resolved."""
+    match = re.search(r"(?:^|,)\s*%s\s*=\s*" % name, body, re.I)
+    if not match:
+        return ""
+    rest = body[match.end():].lstrip()
+    if rest.startswith("{"):
+        depth, out = 0, []
+        for char in rest:
+            if char == "{":
+                depth += 1
+                if depth == 1:
+                    continue
+            elif char == "}":
+                depth -= 1
+                if depth == 0:
+                    return strip_braces("".join(out))
+            out.append(char)
+        return strip_braces("".join(out))
+    if rest.startswith('"'):
+        return strip_braces(rest[1:rest.index('"', 1)])
+    token = re.match(r"[\w.-]+", rest)
+    if not token:
+        return ""
+    word = token.group(0)
+    return strip_braces(macros.get(word, word))
+
+
+def split_awards(value: str) -> List[str]:
+    """Split an award field on ' and ', with braces protecting an 'and' in a name."""
+    parts, depth, current = [], 0, []
+    i = 0
+    while i < len(value):
+        char = value[i]
+        if char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+        if depth == 0 and value[i:i + 5] == " and ":
+            parts.append("".join(current))
+            current = []
+            i += 5
+            continue
+        current.append(char)
+        i += 1
+    parts.append("".join(current))
+    return [strip_braces(p) for p in parts if strip_braces(p)]
+
+
+def read_paper_awards(pubs_dir: Path) -> List[Dict[str, str]]:
+    """Paper awards from the `award` field of every entry under pubs_dir."""
+    rows: List[Dict[str, str]] = []
+    bib_files = sorted(pubs_dir.glob("*.bib"))
+    if not bib_files:
+        print(f"⚠️  No .bib files in {pubs_dir}: no paper awards")
+        return rows
+
+    for bib in bib_files:
+        text = bib.read_text(encoding="utf-8")
+        macros = read_bib_strings(text, prefer_short=True)
+        for match in re.finditer(r"@(\w+)\s*\{\s*([^,\n]+),", text):
+            if match.group(1).lower() == "string":
+                continue
+            key = match.group(2).strip()
+            depth, end = 1, match.end()
+            while end < len(text) and depth:
+                if text[end] == "{":
+                    depth += 1
+                elif text[end] == "}":
+                    depth -= 1
+                end += 1
+            body = text[match.end():end - 1]
+
+            award_field = field_value(body, "award", macros)
+            if not award_field:
+                continue
+            year = field_value(body, "year", macros)
+            venue = (field_value(body, "booktitle", macros)
+                     or field_value(body, "journal", macros)
+                     or field_value(body, "school", macros)
+                     or field_value(body, "institution", macros))
+
+            for award in split_awards(award_field):
+                award_year = year
+                prefix = re.match(r"(\d{4}):\s+(.*)", award)
+                if prefix:
+                    award_year, award = prefix.group(1), prefix.group(2)
+                rows.append({
+                    "Award": award,
+                    "Conference": venue,
+                    "Year": award_year,
+                    "Citation": key,
+                })
+
+    print(f"✅ Read {len(rows)} paper awards from {len(bib_files)} .bib files")
+    return rows
+
+
 def validate_person(person: Dict, index: int) -> bool:
     """Validate person data structure."""
     required = ["name", "role"]
@@ -78,6 +219,10 @@ def validate_award(award: Dict, index: int) -> bool:
     missing = [f for f in required if not award.get(f)]
     if missing:
         print(f"⚠️  Award {index}: Missing required fields: {missing}")
+        return False
+    if award.get("pub_link"):
+        print(f"⚠️  Award {index} ('{award.get('award', '')}'): has a pub_link, so it "
+              "is a paper award — move it to that entry's BibTeX award field")
         return False
     return True
 
@@ -247,16 +392,24 @@ def convert_people_to_interns_undergrad(people_data: List[Dict]) -> List[Dict[st
 
 
 def convert_awards(awards_data: List[Dict]) -> List[Dict[str, str]]:
-    """Convert awards.yaml to awards.csv format."""
-    rows = []
-    for award in awards_data:
-        # Extract BibTeX key from pub_link
-        citation = extract_bibtex_key(award.get("pub_link", ""))
+    """Convert awards.yaml — awards a person holds — to awards.csv rows.
 
+    A paper award belongs in that paper's BibTeX `award` field, not here, so one
+    that still carries a pub_link is reported and skipped rather than emitted
+    twice once the bib also names it.
+    """
+    rows = []
+    for index, award in enumerate(awards_data):
+        if award.get("pub_link"):
+            print(f"⚠️  Award {index} ('{award.get('award', '')}') has a pub_link: "
+                  "it is a paper award and belongs in that entry's BibTeX award "
+                  "field. Skipped.")
+            continue
         rows.append({
             "Award": award.get("award", ""),
+            "Conference": "",
             "Year": str(award.get("year", "")),
-            "Citation": citation,
+            "Citation": "",
         })
 
     return rows
@@ -284,6 +437,7 @@ def main():
     parser.add_argument("--repo", default="siddhss5.github.io", help="GitHub repository name")
     parser.add_argument("--branch", default="main", help="Git branch to fetch from")
     parser.add_argument("--output-dir", default="data", help="Output directory for CSV files")
+    parser.add_argument("--pubs-dir", default="pubs", help="Directory of .bib files to read paper awards from")
     parser.add_argument("--validate", action="store_true", help="Validate YAML structure without writing CSV files")
 
     args = parser.parse_args()
@@ -365,13 +519,14 @@ def main():
         else:
             print("⚠️  No undergraduate intern data found in people.yaml")
 
-    if awards_data:
-        print("\n🔄 Converting awards.yaml...")
-        award_rows = convert_awards(awards_data)
+    print("\n🔄 Converting awards...")
+    award_rows = convert_awards(awards_data or [])
+    award_rows += read_paper_awards(Path(args.pubs_dir))
+    if award_rows:
         write_csv(
             award_rows,
             output_dir / "awards.csv",
-            ["Award", "Year", "Citation"],
+            ["Award", "Conference", "Year", "Citation"],
             SORT_SPECS["awards.csv"],
         )
 
