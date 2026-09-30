@@ -82,16 +82,17 @@ the website repo, stored here as the secret `SITE_REPO_PAT`; without it the
 dispatch step fails on its own and the website picks the CV up on its next
 build instead.
 
-**The website → this repo.** `trigger-cv-build.yml.template` would dispatch
-`yaml-updated` here whenever `people.yaml`, `awards.yaml` or `press.yaml`
-changes, but it has never been installed in the website repo, so that direction
-does not run today: a CV rebuild waits for a push here or the weekly
-`sync-pubs` cron. Installing it needs its own PAT (`CV_REPO_PAT`, in the
-website repo).
+**The website → this repo.** When `people.yaml`, `awards.yaml` or `press.yaml`
+changes there, the website's `trigger-cv-build.yml` dispatches `yaml-updated`
+here and `build.yml` rebuilds. That needs a PAT with **Actions: write** on this
+repo, held in the website repo as `CV_REPO_PAT`.
 
-Paper awards now come from the `.bib` files rather than `awards.yaml`, so
-`sync-pubs` — which refreshes `pubs/*.bib` weekly — is what picks up a new
-paper award.
+**The daily backstop.** `sync-pubs.yml` refreshes `pubs/*.bib` from
+personalrobotics/pubs, regenerates the CSVs, and rebuilds if either changed. It
+runs daily, so anything the two dispatches miss — a paper award added to a
+`.bib` file, for instance, which nothing notifies about — is picked up within a
+day. It used to run weekly and to check only the `.bib` files, so a change to
+the website's YAML alone rebuilt nothing at all.
 
 ## Compilation
 

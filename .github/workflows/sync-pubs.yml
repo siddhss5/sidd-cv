@@ -1,15 +1,21 @@
-name: Sync Publications
+name: Sync Data and Rebuild
 
-# Auto-sync publications from personalrobotics/pubs repository
-# Runs weekly on Mondays at 9am UTC, or manually via workflow_dispatch
+# Refresh what this repo copies from elsewhere - the .bib files from
+# personalrobotics/pubs, and the CSVs generated from the website's YAML - then
+# rebuild the CV if any of it changed.
+#
+# Runs daily, so a change that nothing dispatches about is picked up within a
+# day rather than waiting for someone to push here. The two repository_dispatch
+# events (yaml-updated from the website, cv-updated to it) make the common cases
+# immediate; this is the backstop.
 
 on:
   schedule:
-    - cron: '0 9 * * 1'  # Every Monday at 9am UTC
+    - cron: '0 9 * * *'  # Every day at 9am UTC
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
-  sync-pubs:
+  sync-and-rebuild:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,31 +32,32 @@ jobs:
         done
         cd ..
 
-    - name: Check for changes
-      id: changes
-      run: |
-        if git diff --quiet pubs/*.bib; then
-          echo "changed=false" >> $GITHUB_OUTPUT
-          echo "📄 No publication updates"
-        else
-          echo "changed=true" >> $GITHUB_OUTPUT
-          echo "📝 Publications updated"
-          git diff --stat pubs/*.bib
-        fi
-
     - name: Setup Python
-      if: steps.changes.outputs.changed == 'true'
       uses: actions/setup-python@v4
       with:
         python-version: '3.9'
 
     - name: Install dependencies
-      if: steps.changes.outputs.changed == 'true'
       run: pip install pyyaml
 
     - name: Generate CSV files
-      if: steps.changes.outputs.changed == 'true'
       run: python3 yaml2csv.py --owner siddhss5 --repo siddhss5.github.io --branch main --output-dir data/
+
+    - name: Check for changes
+      id: changes
+      run: |
+        # Both sources matter: the .bib files carry publications and paper
+        # awards, and the CSVs carry everything from the website's YAML. Only
+        # the bibs were checked before, so a change to people.yaml, awards.yaml
+        # or press.yaml alone rebuilt nothing.
+        if git diff --quiet pubs/*.bib data/*.csv; then
+          echo "changed=false" >> $GITHUB_OUTPUT
+          echo "📄 No publication or data updates"
+        else
+          echo "changed=true" >> $GITHUB_OUTPUT
+          echo "📝 Sources updated"
+          git diff --stat pubs/*.bib data/*.csv
+        fi
 
     - name: Compile CV
       if: steps.changes.outputs.changed == 'true'
@@ -65,9 +72,10 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add pubs/*.bib sidd-cv.pdf
-        git commit -m "Sync publications from personalrobotics/pubs [skip ci]"
+        git add pubs/*.bib data/*.csv sidd-cv.pdf
+        git commit -m "Sync data from pubs and the website [skip ci]"
         git push
+
     - name: Tell the website to rebuild
       # The CV is already committed by the time this runs, and the website
       # fetches it on its next build regardless, so a missing or expired PAT
@@ -77,9 +85,7 @@ jobs:
       uses: peter-evans/repository-dispatch@v3
       with:
         # Fine-grained PAT with Contents: write on siddhss5/siddhss5.github.io.
-        # Without it this step fails and the CV still lands here, just not there.
         token: ${{ secrets.SITE_REPO_PAT }}
         repository: siddhss5/siddhss5.github.io
         event-type: cv-updated
         client-payload: '{"sha": "${{ github.sha }}"}'
-
