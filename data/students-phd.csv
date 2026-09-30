@@ -1,10 +1,5 @@
 Name,Coadvisor,Title,Start,Finish,NowAt
-Milad Mesbahi,,,2026,,
-Ethan Pronovost,,,2024,,
-Yunchu Zhang,Abhishek Gupta,,2023,,
-Sidharth Talia,,,2022,,
-Helen Wang,Dieter Fox,,2022,,
-Amal Nanavati,Maya Cakmak,Towards In-Home Deployments of Physically Assistive Robots: Insights from Robot-Assisted Feeding for People with Motor Impairments,2019,2025, Researcher @ Zoox
+Amal Nanavati,Maya Cakmak,Towards In-Home Deployments of Physically Assistive Robots: Insights from Robot-Assisted Feeding for People with Motor Impairments,2019,2025,Researcher @ Zoox
 Matthew Schmittle,,Off-Road Navigation Under Sensing Uncertainty,2018,2025,Researcher @ Overland AI
 Ethan Gordon,,Tractably Adaptable Food Manipulation for Robot-Assisted Feeding,2018,2024,Postdoc @ Penn
 Liyiming Ke,Abhishek Gupta,Teach Robot to Use Chopsticks: a Test Bed for Robotic Learning via Fine Manipulation,2017,2024,Researcher @ Physical Intelligence
@@ -17,7 +12,7 @@ Aditya Vamsikrishna,,Efficient Robot Motion Planning in Cluttered Environments,2
 Gilwoo Lee,,Scalable Bayesian Reinforcement Learning,2015,2020,Founder @ Zordi
 Stefanos Nikolaidis,,Mathematical Models of Adaptation in Human-Robot Collaboration,2014,2018,Assistant Professor @ USC
 Laura Herlant,,Algorithms and Implementation and Studies on Eating with a Shared Control Robot Arm,2013,2018,Director of Robot Perception @ Robotics and AI Institute
-Zita Marinho,Geoff Gordon,Moment-based Algorithms for Structured Prediction,2012,2018, Research Scientist @ DeepMind
+Zita Marinho,Geoff Gordon,Moment-based Algorithms for Structured Prediction,2012,2018,Research Scientist @ DeepMind
 Shervin Javdani,Drew Bagnell,Acting under Uncertainty for Information Gathering and Shared Autonomy,2011,2017,Researcher @ Aurora
 Matt Klingensmith,Michael Kaess,Tracking and Calibrating Robot Arms using SLAM Techniques,2013,2016,Autonomy Engineer @ Wayve
 Jennifer King,,Robust Rearrangement Planning using Nonprehensile Interaction,2012,2016,Researcher @ Berkshire Grey
@@ -27,3 +22,8 @@ Anca Dragan,,Legible Robot Motion Planning,2009,2015,Associate Professor @ Berke
 Mehmet Dogar,,A Framework for Manipulation in Cluttered Environments,2008,2013,Associate Professor @ Leeds
 Alvaro Collet,Martial Hebert,Lifelong Robotic Object Perception,2009,2012,Engineering Lead @ Facebook
 Dmitry Berenson,James Kuffner,Constrained Manipulation Planning,2006,2011,Associate Professor @ Michigan
+Milad Mesbahi,,,2026,,
+Ethan Pronovost,,,2024,,
+Yunchu Zhang,Abhishek Gupta,,2023,,
+Sidharth Talia,,,2022,,
+Helen Wang,Dieter Fox,,2022,,
