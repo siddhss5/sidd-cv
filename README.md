@@ -73,7 +73,26 @@ The script automatically:
 - Handles current vs. alumni distinctions (empty end_year fields)
 
 ### Automated Updates
-The CV automatically rebuilds when YAML files change in the website repo via GitHub Actions `repository_dispatch`. No manual intervention needed!
+
+**This repo → the website.** When a build commits a rebuilt `sidd-cv.pdf`, it
+sends a `cv-updated` `repository_dispatch` to `siddhss5/siddhss5.github.io`,
+which rebuilds and fetches the PDF into `site/assets/`. The website no longer
+keeps its own copy. This needs a fine-grained PAT with **Contents: write** on
+the website repo, stored here as the secret `SITE_REPO_PAT`; without it the
+dispatch step fails on its own and the website picks the CV up on its next
+build instead.
+
+**The website → this repo.** When `people.yaml`, `awards.yaml` or `press.yaml`
+changes there, the website's `trigger-cv-build.yml` dispatches `yaml-updated`
+here and `build.yml` rebuilds. That needs a PAT with **Actions: write** on this
+repo, held in the website repo as `CV_REPO_PAT`.
+
+**The daily backstop.** `sync-pubs.yml` refreshes `pubs/*.bib` from
+personalrobotics/pubs, regenerates the CSVs, and rebuilds if either changed. It
+runs daily, so anything the two dispatches miss — a paper award added to a
+`.bib` file, for instance, which nothing notifies about — is picked up within a
+day. It used to run weekly and to check only the `.bib` files, so a change to
+the website's YAML alone rebuilt nothing at all.
 
 ## Compilation
 
