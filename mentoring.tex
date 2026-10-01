@@ -99,15 +99,15 @@ Pyry Matikainen, Teaching Fellow \hfill 2015-2017
 \subsection{Graduate Interns}
 \noindent
 \DTLforeach*{interns-grad}
-{\name=Name,\from=From,\year=Year}
-{\name~(\from) \hfill \year\\
+{\name=Name,\year=Year}
+{\name \hfill \year\\
 }
 
 \subsection{Undergraduate Interns}
 \noindent
 \DTLforeach*{interns-undergrad}
-{\name=Name,\from=From,\start=Start,\finish=Finish}
-{\name~(\from) \hfill \DTLifnullorempty{\start}{}{\start-}\finish\\
+{\name=Name,\start=Start,\finish=Finish}
+{\name \hfill \DTLifnullorempty{\start}{}{\start-}\finish\\
 }
 
 \subsection{Ph.D Thesis Committees}

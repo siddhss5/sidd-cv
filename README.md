@@ -20,9 +20,9 @@ latexmk -pdf sidd-cv.tex
 
 ## Features
 
-- **YAML Source of Truth**: Data sourced from [website repo](https://github.com/siddhss5/siddhss5.github.io) YAML files
+- **YAML Source of Truth**: People from the lab's [pubs repo](https://github.com/personalrobotics/pubs); awards and press from the [website repo](https://github.com/siddhss5/siddhss5.github.io)
 - **Automated CSV Generation**: Python script fetches YAML and generates sorted CSV files
-- **Cross-Repo Automation**: CV automatically rebuilds when YAML files change in website repo
+- **Cross-Repo Automation**: CV automatically rebuilds when those YAML files change
 - **Smart Sorting**: Built-in sorting eliminates need for manual data ordering
 - **Full Bibliography Support**: Handles journals, conferences, and miscellaneous publications
 - **URL Support**: Clickable links in press coverage section
@@ -52,22 +52,22 @@ latexmk -pdf sidd-cv.tex
 ## Data Management
 
 ### YAML Source of Truth
-Most CV data is maintained in YAML files in the [website repository](https://github.com/siddhss5/siddhss5.github.io):
-- `data/people.yaml` - PhD students, MS students, postdocs, interns
-- `data/awards.yaml` - Awards and honors
-- `data/press.yaml` - Press coverage
+Most CV data is maintained in YAML files elsewhere:
+- `people.yaml` in [personalrobotics/pubs](https://github.com/personalrobotics/pubs) - PhD students, MS students, postdocs, interns. The lab website and goodrobot.ai read the same file.
+- `data/awards.yaml` in the [website repository](https://github.com/siddhss5/siddhss5.github.io) - Awards and honors
+- `data/press.yaml` in the website repository - Press coverage
 
 **Exception**: `data/grants.csv` remains hand-edited in this repository.
 
 ### Generating CSV Files
-Run `yaml2csv.py` to fetch YAML from the website repo and generate CSV files:
+Run `yaml2csv.py` to fetch the YAML and generate CSV files (`--people-owner`, `--people-repo` and `--people-branch` say where `people.yaml` is, defaulting to personalrobotics/pubs on master):
 
 ```bash
 python3 yaml2csv.py --owner siddhss5 --repo siddhss5.github.io --branch main --output-dir data/
 ```
 
 The script automatically:
-- Fetches latest YAML data from website repo
+- Fetches the latest YAML, and fails if `people.yaml` cannot be fetched rather than keep stale mentoring tables
 - Converts YAML to CSV format that LaTeX datatool expects
 - Applies proper sorting (e.g., PhD students by Finish:desc, Start:desc)
 - Handles current vs. alumni distinctions (empty end_year fields)
@@ -82,10 +82,14 @@ the website repo, stored here as the secret `SITE_REPO_PAT`; without it the
 dispatch step fails on its own and the website picks the CV up on its next
 build instead.
 
-**The website → this repo.** When `people.yaml`, `awards.yaml` or `press.yaml`
-changes there, the website's `trigger-cv-build.yml` dispatches `yaml-updated`
-here and `build.yml` rebuilds. That needs a PAT with **Actions: write** on this
-repo, held in the website repo as `CV_REPO_PAT`.
+**The website → this repo.** When `awards.yaml` or `press.yaml` changes there,
+the website's `trigger-cv-build.yml` dispatches `yaml-updated` here and
+`build.yml` rebuilds. That needs a PAT with **Actions: write** on this repo,
+held in the website repo as `CV_REPO_PAT`.
+
+**personalrobotics/pubs → this repo.** When `people.yaml` or a `.bib` file
+changes on pubs' master, its `notify.yaml` dispatches `yaml-updated` here the
+same way, with the same kind of PAT held in pubs as `CV_REPO_PAT`.
 
 **The daily backstop.** `sync-pubs.yml` refreshes `pubs/*.bib` from
 personalrobotics/pubs, regenerates the CSVs, and rebuilds if either changed. It
