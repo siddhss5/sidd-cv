@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-yaml2csv.py — Convert YAML data from website repo to CSV files for LaTeX CV.
+yaml2csv.py — Convert YAML data to CSV files for LaTeX CV.
 
-Fetches YAML files (people.yaml, awards.yaml, press.yaml) from the website
-repository and generates corresponding CSV files that LaTeX datatool expects.
+Fetches people.yaml from the lab's repository (personalrobotics/pubs) and
+awards.yaml and press.yaml from the website repository, and generates the
+corresponding CSV files that LaTeX datatool expects.
 
 A paper's awards are not in awards.yaml: they live in the `award` field of the
 paper's own BibTeX entry, and awards.yaml holds only awards a person holds, such
@@ -367,7 +368,6 @@ def convert_people_to_interns_grad(people_data: List[Dict]) -> List[Dict[str, st
 
         rows.append({
             "Name": person.get("name", ""),
-            "From": person.get("university", ""),
             "Year": str(person.get("start_year", "")),
         })
 
@@ -383,7 +383,6 @@ def convert_people_to_interns_undergrad(people_data: List[Dict]) -> List[Dict[st
 
         rows.append({
             "Name": person.get("name", ""),
-            "From": person.get("university", ""),
             "Start": str(person.get("start_year", "")),
             "Finish": str(person.get("end_year", "")) if person.get("end_year") else "",
         })
@@ -436,6 +435,9 @@ def main():
     parser.add_argument("--owner", default="siddhss5", help="GitHub repository owner")
     parser.add_argument("--repo", default="siddhss5.github.io", help="GitHub repository name")
     parser.add_argument("--branch", default="main", help="Git branch to fetch from")
+    parser.add_argument("--people-owner", default="personalrobotics", help="Owner of the repository holding people.yaml")
+    parser.add_argument("--people-repo", default="pubs", help="Repository holding people.yaml")
+    parser.add_argument("--people-branch", default="master", help="Branch to fetch people.yaml from")
     parser.add_argument("--output-dir", default="data", help="Output directory for CSV files")
     parser.add_argument("--pubs-dir", default="pubs", help="Directory of .bib files to read paper awards from")
     parser.add_argument("--validate", action="store_true", help="Validate YAML structure without writing CSV files")
@@ -444,10 +446,14 @@ def main():
     output_dir = Path(args.output_dir)
     output_dir.mkdir(exist_ok=True)
 
-    print(f"📥 Fetching YAML files from {args.owner}/{args.repo} ({args.branch} branch)...\n")
+    print(f"📥 Fetching people.yaml from {args.people_owner}/{args.people_repo} ({args.people_branch} branch)...")
+    people_data = fetch_yaml(args.people_owner, args.people_repo, args.people_branch, "people.yaml")
+    if people_data is None:
+        # Without it every mentoring table would silently keep its old rows.
+        print("❌ people.yaml could not be fetched; not generating stale CSVs")
+        sys.exit(1)
 
-    # Fetch YAML files
-    people_data = fetch_yaml(args.owner, args.repo, args.branch, "data/people.yaml")
+    print(f"📥 Fetching YAML files from {args.owner}/{args.repo} ({args.branch} branch)...\n")
     awards_data = fetch_yaml(args.owner, args.repo, args.branch, "data/awards.yaml")
     press_data = fetch_yaml(args.owner, args.repo, args.branch, "data/press.yaml")
 
@@ -501,7 +507,7 @@ def main():
             write_csv(
                 intern_grad_rows,
                 output_dir / "interns-grad.csv",
-                ["Name", "From", "Year"],
+                ["Name", "Year"],
                 SORT_SPECS["interns-grad.csv"],
             )
         else:
@@ -513,7 +519,7 @@ def main():
             write_csv(
                 intern_undergrad_rows,
                 output_dir / "interns-undergrad.csv",
-                ["Name", "From", "Start", "Finish"],
+                ["Name", "Start", "Finish"],
                 SORT_SPECS["interns-undergrad.csv"],
             )
         else:
