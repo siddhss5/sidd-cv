@@ -303,10 +303,28 @@ def write_csv(rows: List[Dict[str, str]], output_path: Path, fieldnames: List[st
     print(f"✅ Generated {output_path.name} ({len(sorted_rows)} rows)")
 
 
+# The fields that belong to one role a person held, rather than to the person.
+ROLE_FIELDS = ("role", "start_year", "end_year", "degree", "thesis_title", "co_advisor")
+
+
+def role_records(people_data: List[Dict]):
+    """Each role each person held in the lab: their `earlier_roles`, oldest
+    first, then their current or last role. An earlier role is the person with
+    that role's own fields, so a postdoc who became faculty is still listed as
+    a postdoc for the years they were one. Entries without a role are skipped.
+    """
+    for person in people_data:
+        for earlier in person.get("earlier_roles") or []:
+            if isinstance(earlier, dict) and earlier.get("role"):
+                # A field the earlier role leaves out is blank, not the person's.
+                yield {**person, **{f: earlier.get(f) or "" for f in ROLE_FIELDS}}
+        yield person
+
+
 def convert_people_to_students_phd(people_data: List[Dict]) -> List[Dict[str, str]]:
     """Convert people.yaml (role=phd_student) to students-phd.csv format."""
     rows = []
-    for person in people_data:
+    for person in role_records(people_data):
         if person.get("role") != "phd_student":
             continue
 
@@ -325,7 +343,7 @@ def convert_people_to_students_phd(people_data: List[Dict]) -> List[Dict[str, st
 def convert_people_to_students_ms(people_data: List[Dict]) -> List[Dict[str, str]]:
     """Convert people.yaml (role=ms_student) to students-ms.csv format."""
     rows = []
-    for person in people_data:
+    for person in role_records(people_data):
         if person.get("role") != "ms_student":
             continue
 
@@ -344,7 +362,7 @@ def convert_people_to_students_ms(people_data: List[Dict]) -> List[Dict[str, str
 def convert_people_to_postdocs(people_data: List[Dict]) -> List[Dict[str, str]]:
     """Convert people.yaml (role=postdoc) to postdocs.csv format."""
     rows = []
-    for person in people_data:
+    for person in role_records(people_data):
         if person.get("role") != "postdoc":
             continue
 
@@ -362,7 +380,7 @@ def convert_people_to_postdocs(people_data: List[Dict]) -> List[Dict[str, str]]:
 def convert_people_to_interns_grad(people_data: List[Dict]) -> List[Dict[str, str]]:
     """Convert people.yaml (role=intern_grad) to interns-grad.csv format."""
     rows = []
-    for person in people_data:
+    for person in role_records(people_data):
         if person.get("role") != "intern_grad":
             continue
 
@@ -377,7 +395,7 @@ def convert_people_to_interns_grad(people_data: List[Dict]) -> List[Dict[str, st
 def convert_people_to_interns_undergrad(people_data: List[Dict]) -> List[Dict[str, str]]:
     """Convert people.yaml (role=intern_undergrad) to interns-undergrad.csv format."""
     rows = []
-    for person in people_data:
+    for person in role_records(people_data):
         if person.get("role") != "intern_undergrad":
             continue
 
