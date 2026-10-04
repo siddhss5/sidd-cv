@@ -37,8 +37,6 @@ SORT_SPECS = {
     "students-phd.csv": [("Finish", "desc"), ("Start", "desc")],
     "students-ms.csv": [("Finish", "desc")],
     "postdocs.csv": [("Start", "desc"), ("Finish", "desc")],
-    "interns-grad.csv": [("Year", "desc")],
-    "interns-undergrad.csv": [("Finish", "desc")],
     "awards.csv": [("Year", "desc")],
     "press.csv": [("Year", "desc")],
 }
@@ -377,37 +375,6 @@ def convert_people_to_postdocs(people_data: List[Dict]) -> List[Dict[str, str]]:
     return rows
 
 
-def convert_people_to_interns_grad(people_data: List[Dict]) -> List[Dict[str, str]]:
-    """Convert people.yaml (role=intern_grad) to interns-grad.csv format."""
-    rows = []
-    for person in role_records(people_data):
-        if person.get("role") != "intern_grad":
-            continue
-
-        rows.append({
-            "Name": person.get("name", ""),
-            "Year": str(person.get("start_year", "")),
-        })
-
-    return rows
-
-
-def convert_people_to_interns_undergrad(people_data: List[Dict]) -> List[Dict[str, str]]:
-    """Convert people.yaml (role=intern_undergrad) to interns-undergrad.csv format."""
-    rows = []
-    for person in role_records(people_data):
-        if person.get("role") != "intern_undergrad":
-            continue
-
-        rows.append({
-            "Name": person.get("name", ""),
-            "Start": str(person.get("start_year", "")),
-            "Finish": str(person.get("end_year", "")) if person.get("end_year") else "",
-        })
-
-    return rows
-
-
 def convert_awards(awards_data: List[Dict]) -> List[Dict[str, str]]:
     """Convert awards.yaml — awards a person holds — to awards.csv rows.
 
@@ -518,30 +485,6 @@ def main():
             ["Name", "Coadvisor", "Start", "Finish", "NowAt"],
             SORT_SPECS["postdocs.csv"],
         )
-
-        # Graduate interns
-        intern_grad_rows = convert_people_to_interns_grad(people_data)
-        if intern_grad_rows:
-            write_csv(
-                intern_grad_rows,
-                output_dir / "interns-grad.csv",
-                ["Name", "Year"],
-                SORT_SPECS["interns-grad.csv"],
-            )
-        else:
-            print("⚠️  No graduate intern data found in people.yaml")
-
-        # Undergraduate interns
-        intern_undergrad_rows = convert_people_to_interns_undergrad(people_data)
-        if intern_undergrad_rows:
-            write_csv(
-                intern_undergrad_rows,
-                output_dir / "interns-undergrad.csv",
-                ["Name", "Start", "Finish"],
-                SORT_SPECS["interns-undergrad.csv"],
-            )
-        else:
-            print("⚠️  No undergraduate intern data found in people.yaml")
 
     print("\n🔄 Converting awards...")
     award_rows = convert_awards(awards_data or [])

@@ -37,8 +37,6 @@ latexmk -pdf sidd-cv.tex
 │   ├── students-phd.csv     # PhD students (generated)
 │   ├── students-ms.csv      # MS students (generated)
 │   ├── postdocs.csv         # Postdoctoral fellows (generated)
-│   ├── interns-grad.csv     # Graduate interns (generated)
-│   ├── interns-undergrad.csv # Undergraduate interns (generated)
 │   ├── grants.csv           # Research grants (hand-edited)
 │   ├── awards.csv           # Awards (generated)
 │   └── press.csv            # Press coverage (generated)
@@ -53,7 +51,7 @@ latexmk -pdf sidd-cv.tex
 
 ### YAML Source of Truth
 Most CV data is maintained in YAML files elsewhere:
-- `people.yaml` in [personalrobotics/pubs](https://github.com/personalrobotics/pubs) - PhD students, MS students, postdocs, interns. The lab website and goodrobot.ai read the same file.
+- `people.yaml` in [personalrobotics/pubs](https://github.com/personalrobotics/pubs) - PhD students, MS students and postdocs, including the roles a person held before their current or last one (`earlier_roles`). The lab website and goodrobot.ai read the same file.
 - `data/awards.yaml` in the [website repository](https://github.com/siddhss5/siddhss5.github.io) - Awards and honors
 - `data/press.yaml` in the website repository - Press coverage
 
@@ -140,7 +138,6 @@ The Python script handles YAML-to-CSV conversion:
 - Maps YAML fields to CSV columns (e.g., `co_advisor` → `Coadvisor`)
 - Applies sorting rules for each data type
 - Handles empty fields correctly (e.g., current students have no end_year)
-- Gracefully handles missing data (e.g., interns not yet in YAML)
 
 ## Dependencies
 
